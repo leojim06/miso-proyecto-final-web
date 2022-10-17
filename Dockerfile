@@ -1,12 +1,15 @@
-FROM node:12.0 as build-stage
+# Stage 0, "build-stage", based on Node.js, to build and compile the frontend
+FROM node:12.18.3 as build-stage
 WORKDIR /app
-COPY package*.json /app/
+COPY package.json /app
 RUN npm install
-COPY ./ /app/
-ARG configuration=production
-RUN npm run build -- --output-path=./dist/out --configuration production
+# COPY . .
+#RUN ls 
+COPY . /app
+# RUN npm ci && npm run build
+RUN npm run build --prod --output-path=./dist/out 
 
-
+# Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx:1.15
 #Copy ci-dashboard-dist
 COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
