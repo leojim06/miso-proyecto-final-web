@@ -7,11 +7,11 @@ RUN npm install
 #RUN ls 
 COPY . /app
 # RUN npm ci && npm run build
-RUN npm run build --prod 
+RUN npm run build --prod
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx:1.15
 #Copy ci-dashboard-dist
-COPY --from=build-stage app/dist/miso-proyecto-final-web/ /usr/share/nginx/html
+COPY --from=build-stage /app/dist/miso-proyecto-final-web/ /usr/share/nginx/html
 #Copy default nginx configuration
 COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
