@@ -4,9 +4,9 @@ metadata:
   labels:
     run: sportapp-web
   name: sportapp-web
-  namespace: default
+  namespace: development
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       run: sportapp-web
@@ -19,5 +19,5 @@ spec:
         - image: IMAGE
           name: sportapp-web
           ports:
-            - containerPort: 8080
+            - containerPort: 80
       serviceAccountName: ksa-sportapp
