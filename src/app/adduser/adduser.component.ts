@@ -18,13 +18,13 @@ export class AdduserComponent implements OnInit {
   }
   addUser(form:NgForm){
 
-    
+
     form.value.date = this.date;
   this.userSer.doUserRegistration(form.value).subscribe((data:string)=>{
     console.log(data);
-   
+
     this.msg = data;
-    
+
     form.reset();
 
   }, (error:any)=>{
@@ -52,7 +52,7 @@ export class AdduserComponent implements OnInit {
 
     },(error:any)=>{
       console.log(error);
-      this.msg="Something went wrong";
+      this.msg="Algo salió mal";
     })
   }
 

@@ -18,7 +18,7 @@ font-family: 'Londrina Solid', cursive;">
 
                 <ul class="navbar-nav me-auto  mb-lg-0">
                     <li class="nav-item" style="margin-right: 1vh;">
-                        <h3 style="color:#00ffff" *ngIf="userSer.isLoggedIn()">  Hustle up ! &nbsp; {{userSer.name}} </h3>
+                        <h3 style="color:#00ffff" *ngIf="userSer.isLoggedIn()"> Bienvenido! &nbsp; {{userSer.name}} </h3>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
                         <button i18n class="btn btn-outline-info color-header-menu" routerLink="/" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;">Inicio</button>
@@ -33,7 +33,7 @@ font-family: 'Londrina Solid', cursive;">
                         <button class="btn btn-outline-info color-header-menu" routerLink="/login" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="!userSer.isLoggedIn()">Ingreso</button>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
-                        <button class="btn btn-outline-info color-header-menu" routerLink="/profile" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="userSer.isLoggedIn()">Profile</button>
+                        <button class="btn btn-outline-info color-header-menu" routerLink="/profile" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="userSer.isLoggedIn()">Perfil</button>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
                         <button class="btn btn-outline-info" routerLink="/manager" style="color: aqua; font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="userSer.isAdmin()">manager</button>

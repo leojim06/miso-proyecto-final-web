@@ -5,52 +5,44 @@ import { UsersService } from '../users.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  msg : string;
+  msg: string;
 
-  constructor(public userSer : UsersService, public myRouter : Router,public activeRoute: ActivatedRoute) { }
+  constructor(
+    public userSer: UsersService,
+    public myRouter: Router,
+    public activeRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {
-    
-  }
- 
-  doLogin(form:NgForm)
-  {
+  ngOnInit(): void {}
+
+  doLogin(form: NgForm) {
     console.log(form.value);
 
-    this.userSer.doUserLogin(form.value).subscribe((data:any[])=>{
+    this.userSer.doUserLogin(form.value).subscribe(
+      (data: any[]) => {
+        console.log(data);
+        if (data.length == 0) {
+          this.msg = 'El usuario o la contraseña no son correctos';
+        } else {
+          localStorage.setItem('loggeduser', data[0]._id);
+          localStorage.setItem('loggedusername', data[0].Fname);
+          localStorage.setItem('loggedusernamee', data[0].lname);
+          localStorage.setItem('loggedusergen', data[0].gender);
+          localStorage.setItem('loggeduserage', data[0].userage);
+          this.myRouter.navigateByUrl('/profile');
+        }
+        if (data[0]._id == 1635362908540) {
+          localStorage.setItem('loggedadmin', data[0]._id);
+        }
+      },
+      (error: any) => {
+        console.log(error);
 
-      console.log(data);
-
-     
-
-     if(data.length==0)
-     {
-       this.msg = "Invalid Login";
-     }
-     else {
-       localStorage.setItem("loggeduser", data[0]._id);
-       localStorage.setItem("loggedusername", data[0].Fname);
-       localStorage.setItem("loggedusernamee", data[0].lname);
-       localStorage.setItem("loggedusergen", data[0].gender);
-       localStorage.setItem("loggeduserage", data[0].userage);
-      this.myRouter.navigateByUrl("/profile");
-     }
-     if(data[0]._id==1635362908540)
-     {
-      localStorage.setItem("loggedadmin", data[0]._id);
-      
-     }
-
-    }, (error:any)=>{
-
-      console.log(error);
-
-      this.msg = "Something went wrong";
-
-    });
+        this.msg = 'Algo salió mal';
+      }
+    );
   }
-
 }

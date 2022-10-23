@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
       console.log(data);
 
       this.msg = data;
-      
+
       form.reset();
 
     }, (error:any)=>{
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       this.msg = "Something Went Wrong!!";
 
     });
-    
+
   }
   uuemailcheck(uemail:string)
   {
@@ -59,11 +59,11 @@ export class RegisterComponent implements OnInit {
 
     },(error:any)=>{
       console.log(error);
-      this.msg="Something went wrong";
+      this.msg="Algo salió mal";
     })
   }
- 
-   
- 
+
+
+
 
 }
