@@ -12,7 +12,8 @@
   dir: 'gke'
   args:
   - '-c'
-  - 'sed -i "s/IMAGE/PEPE/g" deployment.yaml'
+  - |-
+    sed -i "s/IMAGE/PEPE/g" deployment.yaml
   # Apply Kubernetes Config files
 # - name: 'gcr.io/cloud-builders/kubectl'
 #   args: ['apply', '-f', 'gke/']
