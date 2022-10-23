@@ -9,7 +9,7 @@ steps:
 - name: "gcr.io/cloud-builders/gke-deploy"
   args:
   - run
-  - --app="sportapp-web"
+  - --app=sportapp-web
   - --expose=80
   - --image=gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA
   - --location=southamerica-east1-a
