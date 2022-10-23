@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     run: sportapp-web
-  name:sportapp-web
+  name: sportapp-web
   namespace: default
 spec:
   replicas: 3
