@@ -21,16 +21,16 @@ font-family: 'Londrina Solid', cursive;">
                         <h3 style="color:#00ffff" *ngIf="userSer.isLoggedIn()">  Hustle up ! &nbsp; {{userSer.name}} </h3>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
-                        <button class="btn btn-outline-info color-header-menu" routerLink="/" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;">Home</button>
+                        <button i18n class="btn btn-outline-info color-header-menu" routerLink="/" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;">Inicio</button>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
-                        <button class="btn btn-outline-info color-header-menu" routerLink="/packages" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;">Packages</button>
+                        <button class="btn btn-outline-info color-header-menu" routerLink="/packages" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;">Planes</button>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
-                        <button class="btn btn-outline-info color-header-menu" routerLink="/register" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="!userSer.isLoggedIn()">Register</button>
+                        <button class="btn btn-outline-info color-header-menu" routerLink="/register" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="!userSer.isLoggedIn()">Registro</button>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
-                        <button class="btn btn-outline-info color-header-menu" routerLink="/login" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="!userSer.isLoggedIn()">Login</button>
+                        <button class="btn btn-outline-info color-header-menu" routerLink="/login" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="!userSer.isLoggedIn()">Ingreso</button>
                     </li>
                     <li class="nav-item" style="margin-right: 1vh;">
                         <button class="btn btn-outline-info color-header-menu" routerLink="/profile" style="font-size: 100%; font-family: 'Big Shoulders Stencil Display', cursive; font-family: 'Londrina Solid', cursive;" *ngIf="userSer.isLoggedIn()">Profile</button>
