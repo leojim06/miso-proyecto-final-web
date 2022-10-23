@@ -1,12 +1,11 @@
 steps:
-#   # build the container image
-# - name: "gcr.io/cloud-builders/docker"
-#   args: ["build", "-t", "gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA", "."]
-#   # push container image
-# - name: "gcr.io/cloud-builders/docker"
-#   args: ["push", "gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA"]
+  # build the container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA", "."]
+  # push container image
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA"]
   # Replace Image in Deployment.yaml 
-# Step 0: REPLACE variables in app.yaml file
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   dir: 'gke'
@@ -15,11 +14,11 @@ steps:
   - |
     sed -i "s/IMAGE/gcr.io\/sportapp-miso-grupo6\/front-web:$SHORT_SHA/g" deployment.yaml
   # Apply Kubernetes Config files
-# - name: 'gcr.io/cloud-builders/kubectl'
-#   args: ['apply', '-f', 'gke/']
-#   env:
-#   - 'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'
-#   - 'CLOUDSDK_CONTAINER_CLUSTER=sportapp-gke-cluster'  
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply', '-f', 'gke/']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=sportapp-gke-cluster'  
   # deploy container image to GKE
 # - name: "gcr.io/cloud-builders/gke-deploy"
 #   args:
