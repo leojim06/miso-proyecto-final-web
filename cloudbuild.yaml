@@ -6,9 +6,14 @@
 # - name: "gcr.io/cloud-builders/docker"
 #   args: ["push", "gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA"]
   # Replace Image in Deployment.yaml 
+# Step 0: REPLACE variables in app.yaml file
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
-  args: ['-c', 'sed', "-i", "sed -i "s/IMAGE/gcr.io\/sportapp-miso-grupo6\/front-web:$SHORT_SHA/g", 'app.yaml']
+  dir: 'gke'
+  args:
+  - '-c'
+  - |
+    sed -i "s/IMAGE/gcr.io\/sportapp-miso-grupo6\/front-web:$SHORT_SHA/g" deployment.yaml
   # Apply Kubernetes Config files
 # - name: 'gcr.io/cloud-builders/kubectl'
 #   args: ['apply', '-f', 'gke/']
