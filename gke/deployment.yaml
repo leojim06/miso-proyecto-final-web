@@ -16,7 +16,7 @@ spec:
         run: sportapp-web
     spec:
       containers:
-        - image: gcr.io/sportapp-miso-grupo6/front-web
+        - image: IMAGE
           name: sportapp-web
           ports:
             - containerPort: 8080
