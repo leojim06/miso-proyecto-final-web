@@ -7,7 +7,7 @@ RUN npm install
 #RUN ls 
 COPY . /app
 # RUN npm ci && npm run build
-RUN npm run build --baseHref=/web/ --prod
+RUN npm run build --baseHref /web/ --deploy-url / --prod
 
 FROM nginx:alpine
 ## Remove default nginx website
