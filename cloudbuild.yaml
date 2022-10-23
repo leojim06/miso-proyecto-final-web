@@ -1,4 +1,4 @@
-# steps:
+steps:
 #   # build the container image
 # - name: "gcr.io/cloud-builders/docker"
 #   args: ["build", "-t", "gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA", "."]
