@@ -8,11 +8,7 @@
   # Replace Image in Deployment.yaml 
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
-  args: 
-  - '-e'
-  - '-c'
-  - |
-    sed -i "s/IMAGE/gcr.io\/sportapp-miso-grupo6\/front-web:$SHORT_SHA/g" gke/deployment.yaml
+  args: ['-c', 'sed', "-i", "sed -i "s/IMAGE/gcr.io\/sportapp-miso-grupo6\/front-web:$SHORT_SHA/g", 'app.yaml']
   # Apply Kubernetes Config files
 # - name: 'gcr.io/cloud-builders/kubectl'
 #   args: ['apply', '-f', 'gke/']
