@@ -17,8 +17,7 @@ spec:
     spec:
       containers:
         ## [START esp]
-        - image: IMAGE
-          name: sportapp-web
+        - name: sportapp-web
           ports:
             - containerPort: 8080
       serviceAccountName: ksa-sportapp
