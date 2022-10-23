@@ -16,8 +16,8 @@ spec:
         run: sportapp-web
     spec:
       containers:
-        ## [START esp]
-        - name: sportapp-web
+        - image: gcr.io/sportapp-miso-grupo6/front-web
+          name: sportapp-web
           ports:
             - containerPort: 8080
       serviceAccountName: ksa-sportapp
