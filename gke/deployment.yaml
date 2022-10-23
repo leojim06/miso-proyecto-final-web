@@ -20,4 +20,4 @@ spec:
           name: sportapp-web
           ports:
             - containerPort: 80
-      serviceAccountName: ksa-sportapp
+      serviceAccountName: ksa-dev-sportapp
