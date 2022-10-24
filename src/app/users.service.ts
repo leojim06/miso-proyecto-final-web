@@ -18,9 +18,9 @@ name:string="";
   {
     return this.http.post<any[]>("http://localhost:3000/login", data);
   }
-  
 
-  
+
+
   isAdmin(){
     return !!localStorage.getItem("loggedadmin");
   }
@@ -32,13 +32,13 @@ name:string="";
   getAllUsers()
   {
     return this.http.get<any[]>("http://localhost:3000/allusers");
-    
+
   }
   getloggedUserData(userid:string)
   {
     return this.http.get<any[]>("http://localhost:3000/profile/"+userid);
   }
-  
+
   uemailcheckAvail(uemail:string)
   {
     return this.http.get<any[]>("http://localhost:3000/uemailcheck/"+uemail);
@@ -55,12 +55,12 @@ name:string="";
   {
     return this.http.put<string>("http://localhost:3000/updateuser/",data);
   }
-  
+
   addpackages(data:any)
   {
     return this.http.put<string>("http://localhost:3000/cart/",data);
   }
-  
+
   deleteUserData(userid:number)
   {
     return this.http.delete<string>("http://localhost:3000/deleteuser/"+userid);
@@ -69,6 +69,6 @@ name:string="";
   {
     return this.http.get<any[]>("http://localhost:3000/searchuser/"+searchtxt);
   }
- 
-  
+
+
 }

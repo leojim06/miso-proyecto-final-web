@@ -15,6 +15,8 @@ import { ManagerComponent } from './manager/manager.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { ContactComponent } from './contact/contact.component';
+import { ProfileBasicComponent } from './profile-basic/profile-basic.component';
+import { SportPreferenceComponent } from './sport-preference/sport-preference.component';
 
 const routes: Routes = [
    {path:"",component:SlideComponent},
@@ -28,6 +30,8 @@ const routes: Routes = [
    {path:"manager", component:ManagerComponent, canActivate:[AdminGuard]},
    {path:"edituser/:userid",component:EdituserComponent,canActivate:[AdminGuard]},
    {path:"adduser", component:AdduserComponent,canActivate:[AdminGuard]},
+   {path:"profile-basic", component:ProfileBasicComponent, canActivate:[AuthGuard]},
+   {path:"sport-preference", component:SportPreferenceComponent, canActivate:[AuthGuard]},
    {path:"**",component:NotfoundComponent}
 
 ];
