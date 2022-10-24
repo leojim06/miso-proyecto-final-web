@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/web/",
             "outputPath": "dist/miso-proyecto-final-web",
             "index": "src/index.html",
             "main": "src/main.ts",
