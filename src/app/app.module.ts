@@ -21,6 +21,8 @@ import { ManagerComponent } from './manager/manager.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { ContactComponent } from './contact/contact.component';
+import { ProfileBasicComponent } from './profile-basic/profile-basic.component';
+import { SportPreferenceComponent } from './sport-preference/sport-preference.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ContactComponent } from './contact/contact.component';
     ManagerComponent,
     AdduserComponent,
     EdituserComponent,
-    ContactComponent
+    ContactComponent,
+    ProfileBasicComponent,
+    SportPreferenceComponent
   ],
   imports: [
     BrowserModule,

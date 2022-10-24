@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('loggedusernamee', data[0].lname);
           localStorage.setItem('loggedusergen', data[0].gender);
           localStorage.setItem('loggeduserage', data[0].userage);
-          this.myRouter.navigateByUrl('/profile');
+          this.myRouter.navigateByUrl('/profile-basic');
         }
         if (data[0]._id == 1635362908540) {
           localStorage.setItem('loggedadmin', data[0]._id);
