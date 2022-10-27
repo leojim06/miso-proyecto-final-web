@@ -71,16 +71,15 @@ font-family: 'Londrina Solid', cursive;">
                   type="email"  #uemail="ngModel" [ngModel]= "userdata.uemail" placeholder="name@example.com" required email />
                 <label for="inputEmail">Email address</label>
               </div>
-              <p class="alert alert-danger" *ngIf="uemail.errors?.required && uemail.touched">Please enter the Email</p>
-              <p class="alert alert-danger" *ngIf="uemail.errors?.email && uemail.touched">Please enter the valid Email
+              <p class="alert alert-danger" *ngIf="uemail.errors?.required && uemail.touched">Por favor ingrese un correo electrónico valido.</p>
+              <p class="alert alert-danger" *ngIf="uemail.errors?.email && uemail.touched">Por favor ingrese un correo electrónico valido.
               </p>
               <div class="form-floating mb-3">
                 <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="userpass"
                 [ngModel]= "userdata.userpass"  #userpass="ngModel" required password minlength="8" />
                 <label for="inputPassword">Create Password</label>
               </div>
-              <p class="alert alert-danger" *ngIf="userpass.errors?.required && userpass.touched">Please Create a
-                password</p>
+              <p class="alert alert-danger" *ngIf="userpass.errors?.required && userpass.touched">Por favor crear una contraseña</p>
               <p class="alert alert-danger" *ngIf="userpass.errors?.minlength">Please Create a strong password (min 8
                 character) </p>
               <h4 style="color:aqua; margin: 1vw; display: flex; justify-content: center;">Package</h4>

@@ -22,16 +22,17 @@ export class LoginComponent implements OnInit {
     console.log(form.value);
 
     this.userSer.doUserLogin(form.value).subscribe(
-      (data: any[]) => {
+      (data) => {
         console.log(data);
         if (data.length == 0) {
           this.msg = 'El usuario o la contraseña no son correctos';
         } else {
-          localStorage.setItem('loggeduser', data[0]._id);
-          localStorage.setItem('loggedusername', data[0].Fname);
-          localStorage.setItem('loggedusernamee', data[0].lname);
-          localStorage.setItem('loggedusergen', data[0].gender);
-          localStorage.setItem('loggeduserage', data[0].userage);
+          localStorage.setItem('loggeduser', data.userId);
+          localStorage.setItem('loggedtoken', data.accessToken);
+          // localStorage.setItem('loggedusername', data[0].userId);
+          // localStorage.setItem('loggedusernamee', data[0].lname);
+          // localStorage.setItem('loggedusergen', data[0].gender);
+          // localStorage.setItem('loggeduserage', data[0].userage);
           this.myRouter.navigateByUrl('/profile-basic');
         }
         if (data[0]._id == 1635362908540) {

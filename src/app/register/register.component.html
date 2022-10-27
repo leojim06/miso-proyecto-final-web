@@ -82,23 +82,41 @@ font-family: 'Londrina Solid', cursive;">
               <p class="alert alert-danger" *ngIf="userphone.errors?.pattern">please enter the valid phone number</p> -->
 
               <div class="form-floating mb-3">
-                <input class="form-control" id="inputEmail" (blur)="uuemailcheck(uemail.value)" name="uemail"
-                  type="email" ngModel #uemail="ngModel" placeholder="name@example.com" required email />
-                <label for="inputEmail">Correo electrónico</label>
+                <input class="form-control" id="inputNombre" name="nombres"
+                 ngModel #nombres="ngModel" placeholder="name@example.com" required nombre />
+                <label for="inputNombre">Nombres</label>
               </div>
-              <p class="alert alert-danger" *ngIf="uemail.errors?.required && uemail.touched">Please enter the Email</p>
-              <p class="alert alert-danger" *ngIf="uemail.errors?.email && uemail.touched">Please enter the valid Email
+              <p class="alert alert-danger" *ngIf="nombres.errors?.required && nombres.touched">Por favor ingrese un nombre valido.</p>
+              <p class="alert alert-danger" *ngIf="nombres.errors?.nombre && nombres.touched">Por favor ingrese un nombre valido.
+              </p>
+
+
+              <div class="form-floating mb-3">
+                <input class="form-control" id="inputApellido" name="apellidos"
+                   ngModel #apellidos="ngModel" placeholder="name@example.com" required apellido />
+                <label for="inputApellido">Apellidos</label>
+              </div>
+              <p class="alert alert-danger" *ngIf="apellidos.errors?.required && apellidos.touched">Por favor ingrese un apellido valido.</p>
+              <p class="alert alert-danger" *ngIf="apellidos.errors?.apellido && apellidos.touched">Por favor ingrese un apellido valido.
               </p>
 
               <div class="form-floating mb-3">
-                <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="userpass"
-                  ngModel #userpass="ngModel" required password minlength="8" />
-                <label for="inputPassword">Crear contraseña</label>
+                <input class="form-control" id="inputEmail" (blur)="uuemailcheck(email.value)" name="email"
+                  type="email" ngModel #email="ngModel" placeholder="name@example.com" required email />
+                <label for="inputEmail">Correo electrónico</label>
               </div>
-              <p class="alert alert-danger" *ngIf="userpass.errors?.required && userpass.touched">Please Create a
-                password</p>
-              <p class="alert alert-danger" *ngIf="userpass.errors?.minlength">Please Create a strong password (min 8
-                character) </p>
+              <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Por favor ingrese un correo electrónico valido.</p>
+              <p class="alert alert-danger" *ngIf="email.errors?.email && email.touched">Por favor ingrese un correo electrónico valido.
+              </p>
+
+              <div class="form-floating mb-3">
+                <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="password"
+                  ngModel #password="ngModel" required password minlength="8" />
+                <label for="inputPassword">Contraseña</label>
+              </div>
+              <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Por favor crear una contraseña</p>
+              <p class="alert alert-danger" *ngIf="password.errors?.minlength">Por favor crear una contraseña con (min 8
+                caracteres) </p>
 
               <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                 <button class=" aling-button btn btn-info btn-block" value="Register" type="submit" [disabled]="f.invalid" style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;

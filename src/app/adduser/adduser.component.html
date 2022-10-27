@@ -82,21 +82,22 @@ font-family: 'Londrina Solid', cursive;">
                   type="email" ngModel #uemail="ngModel" placeholder="name@example.com" required email />
                 <label for="inputEmail">Email address</label>
               </div>
-              <p class="alert alert-danger" *ngIf="uemail.errors?.required && uemail.touched">Please enter the Email</p>
-              <p class="alert alert-danger" *ngIf="uemail.errors?.email && uemail.touched">Please enter the valid Email
+              <p class="alert alert-danger" *ngIf="uemail.errors?.required && uemail.touched">Por favor ingrese un
+                correo electrónico valido.</p>
+              <p class="alert alert-danger" *ngIf="uemail.errors?.email && uemail.touched">Por favor ingrese un correo
+                electrónico valido.
               </p>
               <div class="form-floating mb-3">
                 <input class="form-control" id="inputPassword" type="password" placeholder="Password" name="userpass"
                   ngModel #userpass="ngModel" required password minlength="8" />
                 <label for="inputPassword">Create Password</label>
               </div>
-              <p class="alert alert-danger" *ngIf="userpass.errors?.required && userpass.touched">Please Create a
-                password</p>
-              <p class="alert alert-danger" *ngIf="userpass.errors?.minlength">Please Create a strong password (min 8
-                character) </p>
+              <p class="alert alert-danger" *ngIf="userpass.errors?.required && userpass.touched">Por favor crear una contraseña</p>
+              <p class="alert alert-danger" *ngIf="userpass.errors?.minlength">Por favor crear una contraseña con (min 8
+                caracteres)</p>
 
 
-                <h4 style="color:aqua; margin: 1vw; display: flex; justify-content: center;">Package</h4>
+              <h4 style="color:aqua; margin: 1vw; display: flex; justify-content: center;">Package</h4>
               <select class="form-select form-select-lg mb-3" name="pack" ngModel aria-label=".form-select-lg example"
                 placeholder="Select Package">
                 <option selected>Select Package</option>
@@ -110,7 +111,7 @@ font-family: 'Londrina Solid', cursive;">
               <h4 style="color:aqua; margin :1vw; display: flex; justify-content: center;">Level</h4>
               <div class="form-check" style="display:inline-block; color: #c5c6c7; margin-left: 2vw; ">
                 <input class="form-check-input" type="radio" name="level" #level="ngModel" id="gridRadios1"
-                  value="Beginner" checked ngModel >
+                  value="Beginner" checked ngModel>
                 <label class="form-check-label" for="level">
                   Beginner
                 </label>
@@ -157,13 +158,15 @@ font-family: 'Londrina Solid', cursive;">
               <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                 <button class="btn btn-info btn-block" value="Register" type="submit"
                   [disabled]="f.invalid || !useremailavail" style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
-                                                          font-family: 'Londrina Solid', cursive;"> Register</button> <h5 style="color: aqua;">{{msg}}</h5>
+                                                          font-family: 'Londrina Solid', cursive;"> Register</button>
+                <h5 style="color: aqua;">{{msg}}</h5>
               </div>
             </form>
           </div>
           <div class="card-footer text-center py-3">
             <p class="card-text"><small class="text-muted">SportApp</small></p>
-            <button class="btn btn-info me-md-2" type="button" routerLink="/manager" style="border:solid #1F2833; margin: 1vw;">Back
+            <button class="btn btn-info me-md-2" type="button" routerLink="/manager"
+              style="border:solid #1F2833; margin: 1vw;">Back
             </button>
           </div>
         </div>

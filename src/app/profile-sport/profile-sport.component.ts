@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
+import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PackService } from '../pack.service';
 
+
 @Component({
-  selector: 'profile-basic',
-  templateUrl: './profile-basic.component.html',
-  styleUrls: ['./profile-basic.component.css']
+  selector: 'app-profile-sport',
+  templateUrl: './profile-sport.component.html',
+  styleUrls: ['./profile-sport.component.css']
 })
-export class ProfileBasicComponent implements OnInit {
+export class ProfileSportComponent implements OnInit {
   msg: string;
   uuseremailavail=false;
   date = new Date();
@@ -80,25 +81,5 @@ export class ProfileBasicComponent implements OnInit {
     });
 
   }
-  uuemailcheck(uemail:string)
-  {
-    this.userSer.uuemailcheckAvail(uemail).subscribe((data:any[])=>{
-      console.log(data);
-      if(data.length==0)
-      {
-        this.msg=""
-        this.uuseremailavail= true;
-      }
-      else{
-        this.msg="El correo electrónico ya se encuentra registrado ";
-        this.uuseremailavail= false;
-      }
 
-    },(error:any)=>{
-      console.log(error);
-      this.msg="Algo salió mal";
-    })
-  }
 }
-
-
