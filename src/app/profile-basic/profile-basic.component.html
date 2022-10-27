@@ -3,8 +3,16 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
   <div class="d-grid gap-2 d-md-flex justify-content-md-center">
     <button class="btn btn-info me-md-2" type="button" routerLink="" style="border:solid #1F2833; margin: 1vw;">Inicio
     </button>
+    <button class="btn btn-info me-md-2" type="button" routerLink="/profile"
+      style="border:solid #1F2833; margin: 1vw;">Perfil
+    </button>
+
     <button class="btn btn  me-md-2" style=" margin: 1vw; color: aqua; background-color:#1F2833 ;">
-      <h3>Perfil</h3>
+      <h3>Perfil demográfico</h3>
+    </button>
+
+    <button class="btn btn-info me-md-2" type="button" routerLink="/profile-sport"
+      style="border:solid #1F2833; margin: 1vw;">Perfil deportivo
     </button>
     <button class="btn btn-info me-md-2" type="button" routerLink="/packages"
       style="border:solid #1F2833; margin: 1vw;">Planes
@@ -24,7 +32,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
             <div class="card-header " style="background-color:  #c5c6c7;">
               <h2 style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
-                                                  font-family: 'Londrina Solid', cursive;">Registro</h2>
+                                                  font-family: 'Londrina Solid', cursive;">Perfil demográfico</h2>
               <div class="card-body shadow-lg" style="background-color:  #1F2833;">
 
                 <form (submit)="userRegistration(f)" #f="ngForm">
@@ -178,10 +186,11 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                     <button class=" aling-button btn btn-info btn-block" value="Register" type="submit"
-                      [disabled]="f.invalid" style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
-                                                              font-family: 'Londrina Solid', cursive; ">
+                      [disabled]="f.invalid"
+                      style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
+                                                              font-family: 'Londrina Solid', cursive; margin-left: auto;">
                       Guardar</button> &nbsp; &nbsp;
-                      <button class="btn btn-info btn-block" value="Register" type="submit"
+                    <button class="btn btn-info btn-block" value="Register" type="submit"
                       style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
                                                               font-family: 'Londrina Solid', cursive; background-color: #FF4447;">
                       Cancelar</button>

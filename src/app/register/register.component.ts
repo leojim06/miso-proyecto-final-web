@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
         this.uuseremailavail= true;
       }
       else{
-        this.msg="Email already registered";
+        this.msg="El correo electrónico ya se encuentra registrado ";
         this.uuseremailavail= false;
       }
 

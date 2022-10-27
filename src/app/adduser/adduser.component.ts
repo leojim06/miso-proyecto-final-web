@@ -46,7 +46,7 @@ export class AdduserComponent implements OnInit {
         this.useremailavail= true;
       }
       else{
-        this.msg="Email already registered";
+        this.msg="El correo electrónico ya se encuentra registrado ";
         this.useremailavail= false;
       }
 

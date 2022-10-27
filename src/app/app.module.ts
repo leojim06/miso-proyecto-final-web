@@ -23,6 +23,7 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileBasicComponent } from './profile-basic/profile-basic.component';
 import { SportPreferenceComponent } from './sport-preference/sport-preference.component';
+import { ProfileSportComponent } from './profile-sport/profile-sport.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SportPreferenceComponent } from './sport-preference/sport-preference.co
     EdituserComponent,
     ContactComponent,
     ProfileBasicComponent,
-    SportPreferenceComponent
+    SportPreferenceComponent,
+    ProfileSportComponent
   ],
   imports: [
     BrowserModule,
