@@ -71,27 +71,20 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                       <label class="lbl-white">Molestias</label>
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="gender" value="male"
+                      <div class="form-check" *ngFor="let item of hasslee" >
+
+                        <input class="form-check-input" type="checkbox" name="gender" value="{{item.id}}"
                           id="flexRadioDefault1" ngModel #usergender="ngModel" required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
-                          Calambres </label>
+                          {{item.descripcion}} </label>
 
                       </div>
-                      <div class="form-check" style="margin-top: 10px;">
-                        <input class="form-check-input" type="checkbox" name="gender" value="female"
-                          id="flexRadioDefault2" ngModel #usergender="ngModel" required>
-                        <label class="form-check-label" for="flexRadioDefault2"
-                          style="background-color: whitesmoke; border-radius: 3px; width: 50%;  text-align: center;">
-                          Fractura de hueso
-                        </label>
 
-                      </div>
                     </div>
 
-                    <p class="alert alert-danger" *ngIf="usergender.errors?.required && usergender.touched">Por favor
-                      seleccione un genero</p>
+                    <!-- <p class="alert alert-danger" *ngIf="usergender.errors?.required && usergender.touched">Por favor
+                      seleccione una molestia</p> -->
                   </div>
 
                   <div class="row">
@@ -99,23 +92,15 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                       <label class="lbl-white">Lesiones o incapacidades</label>
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="gender" value="male"
+                      <div class="form-check" *ngFor="let item of lesion">
+                        <input class="form-check-input" type="checkbox" name="gender" value="{{item.id}}"
                           id="flexRadioDefault1" ngModel #usergender="ngModel" required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
-                          Calambres </label>
+                          {{item.descripcion}} </label>
 
                       </div>
-                      <div class="form-check" style="margin-top: 10px;">
-                        <input class="form-check-input" type="checkbox" name="gender" value="female"
-                          id="flexRadioDefault2" ngModel #usergender="ngModel" required>
-                        <label class="form-check-label" for="flexRadioDefault2"
-                          style="background-color: whitesmoke; border-radius: 3px; width: 50%;  text-align: center;">
-                          Fractura de hueso
-                        </label>
 
-                      </div>
                     </div>
                   </div>
 

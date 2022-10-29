@@ -4,6 +4,9 @@ import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PackService } from '../pack.service';
+import { UtilService } from '../util.service';
+import { Lesion } from '../models/lesion.model';
+import { Hassle } from '../models/hassle.model';
 
 
 @Component({
@@ -35,16 +38,46 @@ export class ProfileSportComponent implements OnInit {
   };
 
   useriid: any = localStorage.getItem('loggeduser');
+  hasslee: Hassle[];
+  lesion: Lesion[];
 
   constructor(
     public userSer: UsersService,
     public activeRoute: ActivatedRoute,
     public pac: PackService,
-    public rooter:Router
+    public rooter:Router,
+    public utilServ: UtilService
   ) {}
 
   ngOnInit(): void {
     console.log(this.useriid);
+
+    /*
+    Servicio de molestias
+    */
+    this.utilServ.doListHassle().subscribe(
+      (data: Hassle[]) => {
+        console.log('molestias', data)
+        this.hasslee = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+
+    /*
+    Servicio de lesiones
+    */
+    this.utilServ.doListLesion().subscribe(
+      (data: Lesion[]) => {
+        console.log('lesiones', data)
+        this.lesion = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+
 
     this.userSer.getloggedUserData(this.useriid).subscribe(
       (data: any[]) => {

@@ -12,12 +12,12 @@ name:string="";
 
   doUserRegistration(data:any)
   {
-    return this.http.post<string>("http://localhost:3000/register", data);
+    return this.http.post<string>("http://35.244.246.183/usuario/", data);
   }
   doUserLogin(data:any)
   {
     console.log('doUserLogin', data);
-    return this.http.post<any>("http://35.244.246.183/autenticador/auth", {login: data.uemail, password: data.userpass});
+    return this.http.post<any>("http://35.244.246.183/autenticador/auth", {username: data.uemail, password: data.userpass});
   }
 
 
