@@ -7,6 +7,7 @@ import { PackService } from '../pack.service';
 import { UtilService } from '../util.service';
 import { Lesion } from '../models/lesion.model';
 import { Hassle } from '../models/hassle.model';
+import { Sport } from '../models/sport-model';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class ProfileSportComponent implements OnInit {
   useriid: any = localStorage.getItem('loggeduser');
   hasslee: Hassle[];
   lesion: Lesion[];
+  sports: Sport[];
 
   constructor(
     public userSer: UsersService,
@@ -48,6 +50,17 @@ export class ProfileSportComponent implements OnInit {
     public rooter:Router,
     public utilServ: UtilService
   ) {}
+
+  countries = [{
+    id: 1, name: 'France', cities: ['Paris', 'Marseille', 'Nice']
+  },
+  {
+    id: 2, name: 'Germany', cities: ['Hamburg', 'Berlin', 'Munich']
+  },
+  {
+    id: 3, name: 'Italy', cities: ['Roma', 'Milan', 'Napoli']
+  },
+  ];
 
   ngOnInit(): void {
     console.log(this.useriid);
@@ -78,6 +91,19 @@ export class ProfileSportComponent implements OnInit {
       }
     );
 
+       /*
+    Servicio de deportes
+    */
+    this.utilServ.doListSport().subscribe(
+      (data: Sport[]) => {
+        console.log('deportes', data)
+        this.sports = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+
 
     this.userSer.getloggedUserData(this.useriid).subscribe(
       (data: any[]) => {
@@ -88,6 +114,10 @@ export class ProfileSportComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onChange(deviceValue:any) {
+   
   }
 
   userRegistration(form:NgForm)

@@ -106,6 +106,13 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                   <!-- begin:Table -->
                   <label class="lbl-white">Historia deportiva</label>
+                
+                  <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm" style="margin-left: 49%;">
+                    <span cacheSVG="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                      class="svg-icon svg-icon-md svg-icon-danger">Agregar
+                    </span>
+                  </a>
+
                   <div class="table-responsive angular-bootstrap-table lbl-white">
                     <table class="table table-head-custom table-vertical-center overflow-hidden">
                       <thead class="lbl-white">
@@ -127,22 +134,25 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                             <!-- edit -->
                             <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               <span cacheSVG="true"
-                              class="svg-icon svg-icon-md svg-icon-primary">
+                              class="svg-icon svg-icon-md svg-icon-primary"> Editar
                             </span>
                             </a>
                             <!-- delete -->
                             <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm">
                               <span cacheSVG="true"
-                                class="svg-icon svg-icon-md svg-icon-danger">
+                                class="svg-icon svg-icon-md svg-icon-danger"> Eliminar
                               </span>
                             </a>
                           </td>
                         </tr>
                       </tbody>
+
+                
                     </table>
+                   
                   </div>
                   <!-- end: Table -->
-
+             
 
 
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
@@ -158,6 +168,36 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                     <h5 style="color: rgb(255, 30, 0);">{{msg}}</h5>
                   </div>
                 </form>
+
+             
+                
+                <!-- Modal -->
+                <div class="modal fade"   id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Agregar Historia deportiva</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col">
+                            <label>Lesiones o incapacidades:</label>
+                        <select name="city" class="rounded-inputs20 select-select col-md-3" (change)="onChange($event.target)">
+                          <option   [value]="00"> --Seleccione-- </option>
+                          <option *ngFor="let sport of sports"  [value]="sport.id">{{sport.descripcion}}</option>
+                          </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button #close  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
               <div class="card-footer text-center py-3">
                 <div class="small"><a routerLink="/login" style="color:  #1F2833;">¿Tiene cuenta? Iniciar Sesión</a>
