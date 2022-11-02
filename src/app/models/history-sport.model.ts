@@ -1,5 +1,6 @@
 export interface HistorySport {
-  idDeporte: number,
+  idDeporte?: number,
+  deporte?: string,
   edadInicioPractica: number,
   practicadoActualmente: boolean,
   aniosPractica: number,

@@ -8,6 +8,8 @@ import { UtilService } from '../util.service';
 import { Lesion } from '../models/lesion.model';
 import { Hassle } from '../models/hassle.model';
 import { Sport } from '../models/sport-model';
+import { HistorySport } from '../models/history-sport.model';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -42,6 +44,12 @@ export class ProfileSportComponent implements OnInit {
   hasslee: Hassle[];
   lesion: Lesion[];
   sports: Sport[];
+  model   = {id: '1'};
+  optionsPlan: any[] = [{id: true, nombre: 'Sí'}, {id: false, nombre: 'No'}];
+  favoriteSeason: string;
+  historysport:  Array<HistorySport> = [];
+  idDeporteSeleccionado: number;
+  edad: number;
 
   constructor(
     public userSer: UsersService,
@@ -116,8 +124,21 @@ export class ProfileSportComponent implements OnInit {
     );
   }
 
-  onChange(deviceValue:any) {
-   
+  onChangeSport(deviceValue:any) {
+    idDeporteSeleccionado: deviceValue.value;
+    console.log('deporteseleccionado', deviceValue.value);
+  }
+
+  guardar(){
+    
+    this.historysport.push({idDeporte: this.idDeporteSeleccionado,
+                            edadInicioPractica: this.edad,
+                          aniosPractica: 2,
+                        dedicacionHorasSemana: 2,
+                      ciudad: "Bogotá",
+                    practicadoActualmente: JSON.parse( this.favoriteSeason),
+                  deporte: ""});
+    console.log('datostabla', this.historysport);
   }
 
   userRegistration(form:NgForm)

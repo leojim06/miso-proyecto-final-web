@@ -106,7 +106,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                   <!-- begin:Table -->
                   <label class="lbl-white">Historia deportiva</label>
-                
+
                   <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm" style="margin-left: 49%;">
                     <span cacheSVG="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                       class="svg-icon svg-icon-md svg-icon-danger">Agregar
@@ -116,20 +116,22 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                   <div class="table-responsive angular-bootstrap-table lbl-white">
                     <table class="table table-head-custom table-vertical-center overflow-hidden">
                       <thead class="lbl-white">
-                        <th>ID</th>
-                        <th>FIRSTNAME</th>
-                        <th>LASTNAME</th>
-                        <th>EMAIL</th>
-                        <th>GENDER</th>
-                        <th>ACTIONS</th>
+                        <th>Deporte</th>
+                        <th>Edad</th>
+                        <th>Practica</th>
+                        <th>Años</th>
+                        <th>Dedicación</th>
+                        <th>Ciudad</th>
+                        <th>Acciones</th>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>sd</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                        <tr *ngFor="let sport of historysport">
+                          <td class="lbl-white">{{ sport.deporte }}</td>
+                          <td class="lbl-white">{{ sport.edadInicioPractica }}</td>
+                          <td class="lbl-white">{{ sport.practicadoActualmente }}</td>
+                          <td class="lbl-white">{{ sport.aniosPractica }}</td>
+                          <td class="lbl-white">{{ sport.dedicacionHorasSemana }}</td>
+                          <td class="lbl-white">{{ sport.ciudad }}</td>
                           <td>
                             <!-- edit -->
                             <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
@@ -147,12 +149,12 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         </tr>
                       </tbody>
 
-                
+
                     </table>
-                   
+
                   </div>
                   <!-- end: Table -->
-             
+
 
 
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
@@ -169,8 +171,8 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                   </div>
                 </form>
 
-             
-                
+
+
                 <!-- Modal -->
                 <div class="modal fade"   id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -182,17 +184,78 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       <div class="modal-body">
                         <div class="row">
                           <div class="col">
-                            <label>Lesiones o incapacidades:</label>
-                        <select name="city" class="rounded-inputs20 select-select col-md-3" (change)="onChange($event.target)">
+                            <label for="lname">Deporte</label>
+                            <div class="form-floating mb-3">
+                        <select name="city" class="rounded-inputs20 select-select col-md-3" (change)="onChangeSport($event.target)">
                           <option   [value]="00"> --Seleccione-- </option>
                           <option *ngFor="let sport of sports"  [value]="sport.id">{{sport.descripcion}}</option>
                           </select>
+
+                            </div>
                           </div>
                         </div>
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" [(ngModel)]="edad" name="edadMomento" type="text"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Edad</label>
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <div class="col">
+                          <label for="lname">Practica actualmente</label>
+                          <div class="form-check">
+
+                            <div *ngFor="let option of optionsPlan; let i = index">
+                              <input id="season{{i}}" name="seasons" type="radio"
+                                [value]="option.id" [(ngModel)]="favoriteSeason" />
+                              <label for="">{{option.nombre}}</label>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Años de practica</label>
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Dedicación semana</label>
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Ciudad</label>
+                              </div>
+                          </div>
+                        </div>
+
+
                       </div>
                       <div class="modal-footer">
                         <button #close  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button #close type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="guardar()">Guardar</button>
                       </div>
                     </div>
                   </div>
