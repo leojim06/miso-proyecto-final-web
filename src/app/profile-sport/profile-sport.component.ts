@@ -50,6 +50,9 @@ export class ProfileSportComponent implements OnInit {
   historysport:  Array<HistorySport> = [];
   idDeporteSeleccionado: number;
   edad: number;
+  anio: number;
+  horaSemana: number;
+  ciudad: string;
 
   constructor(
     public userSer: UsersService,
@@ -125,19 +128,19 @@ export class ProfileSportComponent implements OnInit {
   }
 
   onChangeSport(deviceValue:any) {
-    idDeporteSeleccionado: deviceValue.value;
-    console.log('deporteseleccionado', deviceValue.value);
+    this.idDeporteSeleccionado = deviceValue.value;
+    console.log('deporteseleccionado', deviceValue);
   }
 
   guardar(){
-    
+
     this.historysport.push({idDeporte: this.idDeporteSeleccionado,
                             edadInicioPractica: this.edad,
-                          aniosPractica: 2,
-                        dedicacionHorasSemana: 2,
-                      ciudad: "Bogotá",
+                          aniosPractica: this.anio,
+                        dedicacionHorasSemana: this.horaSemana,
+                      ciudad: this.ciudad,
                     practicadoActualmente: JSON.parse( this.favoriteSeason),
-                  deporte: ""});
+                  deporte: this.sports?.find(x => x.id === this.idDeporteSeleccionado).toString()});
     console.log('datostabla', this.historysport);
   }
 

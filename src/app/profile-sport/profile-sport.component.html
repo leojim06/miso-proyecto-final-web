@@ -128,7 +128,8 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <tr *ngFor="let sport of historysport">
                           <td class="lbl-white">{{ sport.deporte }}</td>
                           <td class="lbl-white">{{ sport.edadInicioPractica }}</td>
-                          <td class="lbl-white">{{ sport.practicadoActualmente }}</td>
+                          <td class="lbl-white" *ngIf="sport.practicadoActualmente == true ">Sí</td>
+                          <td class="lbl-white" *ngIf="sport.practicadoActualmente == false ">No</td>
                           <td class="lbl-white">{{ sport.aniosPractica }}</td>
                           <td class="lbl-white">{{ sport.dedicacionHorasSemana }}</td>
                           <td class="lbl-white">{{ sport.ciudad }}</td>
@@ -188,7 +189,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                             <div class="form-floating mb-3">
                         <select name="city" class="rounded-inputs20 select-select col-md-3" (change)="onChangeSport($event.target)">
                           <option   [value]="00"> --Seleccione-- </option>
-                          <option *ngFor="let sport of sports"  [value]="sport.id">{{sport.descripcion}}</option>
+                          <option *ngFor="let sport of sports"  [value]="sport.id" name="sport.descripcion">{{sport.descripcion}}</option>
                           </select>
 
                             </div>
@@ -222,7 +223,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="ftpActual" type="text"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Años de practica</label>
                               </div>
@@ -233,7 +234,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="ftpActual" type="text"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Dedicación semana</label>
                               </div>
@@ -244,7 +245,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="ciudad" name="ftpActual" type="text"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Ciudad</label>
                               </div>
