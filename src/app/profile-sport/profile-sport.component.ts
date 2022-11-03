@@ -53,6 +53,9 @@ export class ProfileSportComponent implements OnInit {
   anio: number;
   horaSemana: number;
   ciudad: string;
+  arrayLesion: Array<any> = [];
+  category: any= []
+
 
   constructor(
     public userSer: UsersService,
@@ -129,20 +132,47 @@ export class ProfileSportComponent implements OnInit {
 
   onChangeSport(deviceValue:any) {
     this.idDeporteSeleccionado = deviceValue.value;
-    console.log('deporteseleccionado', deviceValue);
+    console.log('deporteseleccionado', deviceValue.value);
   }
 
-  guardar(){
-
+  saveHistorySport(){
+    console.log('sports33', this.sports);
+    console.log('deporteseleccionadwwo', this.idDeporteSeleccionado);
+    console.log('sports', );
     this.historysport.push({idDeporte: this.idDeporteSeleccionado,
                             edadInicioPractica: this.edad,
                           aniosPractica: this.anio,
                         dedicacionHorasSemana: this.horaSemana,
                       ciudad: this.ciudad,
                     practicadoActualmente: JSON.parse( this.favoriteSeason),
-                  deporte: this.sports?.find(x => x.id === this.idDeporteSeleccionado).toString()});
+                  deporte: this.sports?.filter(x => x.id == this.idDeporteSeleccionado)[0].descripcion,
+                  id: this.historysport.length + 1});
     console.log('datostabla', this.historysport);
   }
+
+  deleteHistorySport(id: number){
+    console.log('position', id);
+    this.historysport = this.historysport.filter(x => x.id !== id);
+    // this.historysport = this.historysport.splice(id,1);
+     console.log('positionSports', this.historysport);
+  }
+
+
+  checkChangeLesion(id: number){
+
+    if (this.category[id]){  
+      this.category[id] = !this.category[id];
+      this.arrayLesion = this.arrayLesion.splice(id,1);
+      console.log('sdss', this.arrayLesion)
+    }
+    else{
+      this.category[id] = true;
+      this.arrayLesion.push(id);
+    }
+ 
+    console.log('arrayLesion', this.arrayLesion);
+  }
+
 
   userRegistration(form:NgForm)
   {

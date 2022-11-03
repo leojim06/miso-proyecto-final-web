@@ -5,5 +5,6 @@ export interface HistorySport {
   practicadoActualmente: boolean,
   aniosPractica: number,
   dedicacionHorasSemana: number,
-  ciudad: string
+  ciudad: string,
+  id: number
 }

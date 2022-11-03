@@ -92,9 +92,9 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                       <label class="lbl-white">Lesiones o incapacidades</label>
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
-                      <div class="form-check" *ngFor="let item of lesion">
+                      <div class="form-check" *ngFor="let item of lesion ; index as i">
                         <input class="form-check-input" type="checkbox" name="gender" value="{{item.id}}"
-                          id="flexRadioDefault1" ngModel #usergender="ngModel" required>
+                          id="flexRadioDefault1"  [checked]="category[i]"   (change)="checkChangeLesion(item.id)"  required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
                           {{item.descripcion}} </label>
@@ -125,7 +125,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <th>Acciones</th>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let sport of historysport">
+                        <tr *ngFor="let sport of historysport; let i = index">
                           <td class="lbl-white">{{ sport.deporte }}</td>
                           <td class="lbl-white">{{ sport.edadInicioPractica }}</td>
                           <td class="lbl-white" *ngIf="sport.practicadoActualmente == true ">Sí</td>
@@ -142,7 +142,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                             </a>
                             <!-- delete -->
                             <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm">
-                              <span cacheSVG="true"
+                              <span cacheSVG="true" (click)="deleteHistorySport(sport.id)"
                                 class="svg-icon svg-icon-md svg-icon-danger"> Eliminar
                               </span>
                             </a>
@@ -199,7 +199,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="edad" name="edadMomento" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="edad" name="edadMomento" type="number"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Edad</label>
                               </div>
@@ -223,7 +223,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="ftpActual" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="ftpActual" type="number"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Años de practica</label>
                               </div>
@@ -234,7 +234,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="ftpActual" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="ftpActual" type="number"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Dedicación semana</label>
                               </div>
@@ -256,7 +256,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       </div>
                       <div class="modal-footer">
                         <button #close  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button #close type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="guardar()">Guardar</button>
+                        <button #close type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveHistorySport()">Guardar</button>
                       </div>
                     </div>
                   </div>
