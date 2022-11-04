@@ -1,10 +1,10 @@
 steps:
   # build the container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["build", "-t", "southamerica-east1-docker.pkg.dev/sportapp-miso-grupo6/sportapp-miso-grupo6-repository/web:$SHORT_SHA", "."]
+  args: ["build", "-t", "southamerica-east1-docker.pkg.dev/sportapp-miso-grupo6/sportapp-miso-grupo6-repository/$REPO_NAME:$SHORT_SHA", "."]
   # push container image
 - name: "gcr.io/cloud-builders/docker"
-  args: ["push", "southamerica-east1-docker.pkg.dev/sportapp-miso-grupo6/sportapp-miso-grupo6-repository/web:$SHORT_SHA"]
+  args: ["push", "southamerica-east1-docker.pkg.dev/sportapp-miso-grupo6/sportapp-miso-grupo6-repository/$REPO_NAME:$SHORT_SHA"]
   # Replace Image in Deployment.yaml 
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
@@ -12,7 +12,7 @@ steps:
   args:
   - '-c'
   - |
-    sed -i "s/IMAGE/southamerica-east1-docker.pkg.dev\/sportapp-miso-grupo6\/sportapp-miso-grupo6-repository\/web:$SHORT_SHA/g" deployment.yaml
+    sed -i "s/IMAGE/southamerica-east1-docker.pkg.dev\/sportapp-miso-grupo6\/sportapp-miso-grupo6-repository\/$REPO_NAME:$SHORT_SHA/g" deployment.yaml
   # Apply Kubernetes Config files
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'gke/']
@@ -20,10 +20,10 @@ steps:
   - 'CLOUDSDK_COMPUTE_ZONE=southamerica-east1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=sportapp-gke-cluster'  
   # deploy container image to GKE
-# - name: "gcr.io/cloud-builders/gke-deploy"
-#   args:
-#   - run
-#   - --app=sportapp-web
-#   - --image=gcr.io/sportapp-miso-grupo6/front-web:$SHORT_SHA
-#   - --location=southamerica-east1-a
-#   - --cluster=sportapp-gke-cluster
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --app=$_APP
+  - --image=gcr.io/sportapp-miso-grupo6/$REPO_NAME:$SHORT_SHA
+  - --location=southamerica-east1-a
+  - --cluster=sportapp-gke-cluster

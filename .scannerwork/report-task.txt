@@ -1,0 +1,7 @@
+organization=miso-proyecto-final-nativos
+projectKey=miso-proyecto-final-nativos_miso-proyecto-final-movil
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.34156
+dashboardUrl=https://sonarcloud.io/dashboard?id=miso-proyecto-final-nativos_miso-proyecto-final-movil
+ceTaskId=AYQq9oyeZ-_jrawRhtMN
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYQq9oyeZ-_jrawRhtMN
