@@ -10,6 +10,7 @@ import { Hassle } from '../models/hassle.model';
 import { Sport } from '../models/sport-model';
 import { HistorySport } from '../models/history-sport.model';
 import { Observable } from 'rxjs';
+import { ProfileSport } from '../models/profile-sport.model';
 
 
 @Component({
@@ -54,7 +55,10 @@ export class ProfileSportComponent implements OnInit {
   horaSemana: number;
   ciudad: string;
   arrayLesion: Array<any> = [];
-  category: any= []
+  arrayHasslee: Array<any> = [];
+  categoryHasslee: any= []
+  categoryLesion: any= []
+  profileSport: ProfileSport[];
 
 
   constructor(
@@ -160,26 +164,42 @@ export class ProfileSportComponent implements OnInit {
 
   checkChangeLesion(id: number){
 
-    if (this.category[id]){  
-      this.category[id] = !this.category[id];
+    if (this.categoryLesion[id]){  
+      this.categoryLesion[id] = !this.categoryLesion[id];
       this.arrayLesion = this.arrayLesion.splice(id,1);
       console.log('sdss', this.arrayLesion)
     }
     else{
-      this.category[id] = true;
+      this.categoryLesion[id] = true;
       this.arrayLesion.push(id);
     }
  
     console.log('arrayLesion', this.arrayLesion);
   }
 
+  checkChangeHasslee(id: number){
 
-  userRegistration(form:NgForm)
+    if (this.categoryHasslee[id]){  
+      this.categoryHasslee[id] = !this.categoryHasslee[id];
+      this.arrayHasslee = this.arrayHasslee.splice(id,1);
+      console.log('sdss', this.arrayHasslee)
+    }
+    else{
+      this.categoryHasslee[id] = true;
+      this.arrayHasslee.push(id);
+    }
+ 
+    console.log('arrayHaslee', this.arrayHasslee);
+  }
+
+
+  userRegistrationProfileSport(form:NgForm)
   {
     console.log("User Registered");
     form.value.date=this.date;
     console.log(form.value);
     this.rooter.navigateByUrl("/login")
+
 
     this.userSer.doUserRegistration(form.value).subscribe((data:string)=>{
 
