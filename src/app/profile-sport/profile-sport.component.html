@@ -1,0 +1,279 @@
+<div class="container" style="font-family: 'Big Shoulders Stencil Display', cursive;
+font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:300vh; border-radius: 12px;">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <button class="btn btn-info me-md-2" type="button" routerLink="" style="border:solid #1F2833; margin: 1vw;">Inicio
+    </button>
+    <!-- <button class="btn btn  me-md-2" style=" margin: 1vw; color: aqua; background-color:#1F2833 ;">
+      <h3>Perfil</h3>
+    </button> -->
+
+    <button class="btn btn-info me-md-2" type="button" routerLink="/profile"
+      style="border:solid #1F2833; margin: 1vw;">Perfil
+    </button>
+
+
+    <button class="btn btn-info me-md-2" type="button" routerLink="/profile-basic"
+      style="border:solid #1F2833; margin: 1vw;">Perfil demográfico
+    </button>
+
+    <button class="btn btn  me-md-2" style=" margin: 1vw; color: aqua; background-color:#1F2833 ;">
+      <h3>Perfil deportivo</h3>
+    </button>
+
+
+    <button class="btn btn-info me-md-2" type="button" routerLink="/packages"
+      style="border:solid #1F2833; margin: 1vw;">Planes
+    </button>
+
+
+  </div>
+  <hr style="height: 2px; margin: 1%;padding: 0; ">
+  <div style="padding-bottom: 2vh;">
+
+    <div class="container" style="min-height: 560px; font-family: 'Big Shoulders Stencil Display', cursive;
+    font-family: 'Londrina Solid', cursive;">
+
+      <div class="row justify-content-center">
+        <div class="col-lg-5" style="width: 50.1%;">
+          <div class="card shadow-lg border-0 rounded-lg mt-5">
+
+            <div class="card-header " style="background-color:  #c5c6c7;">
+              <h2 style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
+                                                  font-family: 'Londrina Solid', cursive;">Perfil deportivo</h2>
+              <div class="card-body shadow-lg" style="background-color:  #1F2833;">
+
+                <form (submit)="userRegistrationProfileSport(f)" #f="ngForm">
+                  <label class="lbl-white">Perfil deportivo</label>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-floating mb-3">
+                        <input class="form-control" id="inputVo2max" #fvo2max="ngModel" name="vo2Max" ngModel
+                          type="text" placeholder="fname" required minlength="3" />
+                        <label for="fname">Vo2 Max</label>
+                      </div>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-floating mb-3">
+                        <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
+                          placeholder="lname" ngModel required />
+                        <label for="lname">FTP Actual</label>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="alert alert-danger" *ngIf="fvo2max.errors?.required && fvo2max.touched">Por favor
+                    ingrese los valor del perfil deportivo</p>
+                  <p class="alert alert-danger" *ngIf="fvo2max.errors?.minlength && fvo2max.touched">Por favor
+                    ingrese mínimo 3 caracteres.</p>
+
+                  <div class="row">
+                    <div class="col">
+
+                      <label class="lbl-white">Molestias</label>
+                      <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
+                      <div class="form-check" *ngFor="let item of hasslee; index as i" >
+
+                        <input class="form-check-input" type="checkbox" name="hasslee" value="{{item.id}}"
+                          id="flexRadioDefault1" [checked]="categoryHasslee[i]"   (change)="checkChangeHasslee(item.id)" required>
+                        <label class="form-check-label" for="flexRadioDefault1"
+                          style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
+                          {{item.descripcion}} </label>
+
+                      </div>
+
+                    </div>
+
+                    <!-- <p class="alert alert-danger" *ngIf="usergender.errors?.required && usergender.touched">Por favor
+                      seleccione una molestia</p> -->
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+
+                      <label class="lbl-white">Lesiones o incapacidades</label>
+                      <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
+                      <div class="form-check" *ngFor="let item of lesion ; index as i">
+                        <input class="form-check-input" type="checkbox" name="lesion" value="{{item.id}}"
+                          id="flexRadioDefault1"  [checked]="categoryLesion[i]"   (change)="checkChangeLesion(item.id)"  required>
+                        <label class="form-check-label" for="flexRadioDefault1"
+                          style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
+                          {{item.descripcion}} </label>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- begin:Table -->
+                  <label class="lbl-white">Historia deportiva</label>
+
+                  <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm" style="margin-left: 49%;">
+                    <span cacheSVG="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                      class="svg-icon svg-icon-md svg-icon-danger">Agregar
+                    </span>
+                  </a>
+
+                  <div class="table-responsive angular-bootstrap-table lbl-white">
+                    <table class="table table-head-custom table-vertical-center overflow-hidden">
+                      <thead class="lbl-white">
+                        <th>Deporte</th>
+                        <th>Edad</th>
+                        <th>Practica</th>
+                        <th>Años</th>
+                        <th>Dedicación</th>
+                        <th>Ciudad</th>
+                        <th>Acciones</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let sport of historysport; let i = index">
+                          <td class="lbl-white">{{ sport.deporte }}</td>
+                          <td class="lbl-white">{{ sport.edadInicioPractica }}</td>
+                          <td class="lbl-white" *ngIf="sport.practicadoActualmente == true ">Sí</td>
+                          <td class="lbl-white" *ngIf="sport.practicadoActualmente == false ">No</td>
+                          <td class="lbl-white">{{ sport.aniosPractica }}</td>
+                          <td class="lbl-white">{{ sport.dedicacionHorasSemana }}</td>
+                          <td class="lbl-white">{{ sport.ciudad }}</td>
+                          <td>
+                            <!-- edit -->
+                            <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                              <span cacheSVG="true"
+                              class="svg-icon svg-icon-md svg-icon-primary"> Editar
+                            </span>
+                            </a>
+                            <!-- delete -->
+                            <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span cacheSVG="true" (click)="deleteHistorySport(sport.id)"
+                                class="svg-icon svg-icon-md svg-icon-danger"> Eliminar
+                              </span>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+
+
+                    </table>
+
+                  </div>
+                  <!-- end: Table -->
+
+
+
+                  <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                    <button class=" aling-button btn btn-info btn-block" value="Register" type="submit"
+                      [disabled]="f.invalid"
+                      style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
+                                                              font-family: 'Londrina Solid', cursive; margin-left: auto;">
+                      Guardar</button> &nbsp; &nbsp;
+                    <button class="btn btn-info btn-block" value="Register" type="submit"
+                      style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
+                                                              font-family: 'Londrina Solid', cursive; background-color: #FF4447;">
+                      Cancelar</button>
+                    <h5 style="color: rgb(255, 30, 0);">{{msg}}</h5>
+                  </div>
+                </form>
+
+
+
+                <!-- Modal -->
+                <div class="modal fade"   id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Agregar Historia deportiva</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col">
+                            <label for="lname">Deporte</label>
+                            <div class="form-floating mb-3">
+                        <select name="city" class="rounded-inputs20 select-select col-md-3" (change)="onChangeSport($event.target)">
+                          <option   [value]="00"> --Seleccione-- </option>
+                          <option *ngFor="let sport of sports"  [value]="sport.id" name="sport.descripcion">{{sport.descripcion}}</option>
+                          </select>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" [(ngModel)]="edad" name="edadMomento" type="number"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Edad</label>
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <div class="col">
+                          <label for="lname">Practica actualmente</label>
+                          <div class="form-check">
+
+                            <div *ngFor="let option of optionsPlan; let i = index">
+                              <input id="season{{i}}" name="seasons" type="radio"
+                                [value]="option.id" [(ngModel)]="favoriteSeason" />
+                              <label for="">{{option.nombre}}</label>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="ftpActual" type="number"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Años de practica</label>
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="ftpActual" type="number"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Dedicación semana</label>
+                              </div>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col">
+                              <div class="form-floating mb-2">
+                                <input class="form-control" id="inputftp" [(ngModel)]="ciudad" name="ftpActual" type="text"
+                                  placeholder="lname" ngModel required />
+                                <label for="lname">Ciudad</label>
+                              </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button #close  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button #close type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveHistorySport()">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="card-footer text-center py-3">
+                <div class="small"><a routerLink="/login" style="color:  #1F2833;">¿Tiene cuenta? Iniciar Sesión</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

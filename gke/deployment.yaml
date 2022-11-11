@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: sportapp-web
+  name: sportapp-web
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: sportapp-web
+  template:
+    metadata:
+      labels:
+        run: sportapp-web
+    spec:
+      containers:
+        - image: IMAGE
+          name: sportapp-web
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /web/
+              port: 80  
+      serviceAccountName: ksa-dev-sportapp

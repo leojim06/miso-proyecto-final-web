@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+.html{
+    background-color: #1F2833;
+    font-family: 'Big Shoulders Stencil Display', cursive;
+font-family: 'Londrina Solid', cursive;
+}
+
+.btn-outline-info {
+  --bs-btn-border-color: #1F2833;
+}
+
+.color-header-menu {
+  color: white;
+}
+.lbl-white {
+  color: white;
+}
+/*
+.aling-button {
+  margin-left: 230px;
+} */
