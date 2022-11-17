@@ -9,8 +9,11 @@ import { Lesion } from '../models/lesion.model';
 import { Hassle } from '../models/hassle.model';
 import { Sport } from '../models/sport-model';
 import { HistorySport } from '../models/history-sport.model';
-import { Observable } from 'rxjs';
+import { Observable, VirtualTimeScheduler } from 'rxjs';
 import { ProfileSport } from '../models/profile-sport.model';
+import { ErrorHttp } from '../models/errorHttp.model';
+import { Servers } from '../models/servers-class.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -58,8 +61,11 @@ export class ProfileSportComponent implements OnInit {
   arrayHasslee: Array<any> = [];
   categoryHasslee: any= []
   categoryLesion: any= []
-  profileSport: ProfileSport[];
-
+  profileSport: ProfileSport = {idDeportista: null, vo2Max: null, ftpActual: null, lesiones: null, molestias: null, historiasDeportivas: null};
+  idDeportista: number;
+  codeError: number;
+  servers: Servers;
+  albumForm!: FormGroup;
 
   constructor(
     public userSer: UsersService,
@@ -82,6 +88,24 @@ export class ProfileSportComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.useriid);
+
+    this.idDeportista =parseInt(localStorage.getItem('loggeduser'));
+
+    /*
+      Consulta si tiene información  del perfil deportivo
+    */
+    this.userSer.doUserGetProfileSport(this.useriid).subscribe(
+      (data: any) => {
+        console.log('doUserGetProfileSport', data);
+        this.codeError = data.statusCode;
+      },
+      (error: any) => {
+        console.log('doUserGetProfileSport', error);
+        this.codeError = error.status;
+        console.log('codeError', this.codeError);
+      }
+    );
+
 
     /*
     Servicio de molestias
@@ -133,6 +157,17 @@ export class ProfileSportComponent implements OnInit {
       }
     );
   }
+  //FIN ng-oninit
+
+
+  
+  prueba(){
+           this.userSer.getServers().subscribe(servers => this.servers = servers);
+           //vo2Max = 12;
+  }
+
+
+
 
   onChangeSport(deviceValue:any) {
     this.idDeporteSeleccionado = deviceValue.value;
@@ -196,12 +231,23 @@ export class ProfileSportComponent implements OnInit {
   userRegistrationProfileSport(form:NgForm)
   {
     console.log("User Registered");
-    form.value.date=this.date;
+    // form.value.date=this.date;
     console.log(form.value);
+
+    this.profileSport.idDeportista = this.idDeportista;
+    this.profileSport.vo2Max = form.value.vo2Max;
+    this.profileSport.ftpActual = form.value.ftpActual;
+    this.profileSport.molestias = this.arrayHasslee;
+    this.profileSport.lesiones = this.arrayLesion;
+    this.profileSport.historiasDeportivas = this.historysport;
+
+    console.log('register-sport',this.profileSport);
+
+
     this.rooter.navigateByUrl("/login")
 
 
-    this.userSer.doUserRegistration(form.value).subscribe((data:string)=>{
+    this.userSer.doUserRegistrationProfileSport(this.profileSport,  this.profileSport.idDeportista).subscribe((data:string)=>{
 
       console.log(data);
 

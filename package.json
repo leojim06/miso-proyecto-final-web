@@ -26,6 +26,7 @@
     "i18n": "^0.15.1",
     "mangodb": "^1.0.0",
     "mongodb": "^3.7.3",
+    "ngx-toastr": "^15.2.1",
     "ngx-webstorage-service": "^4.1.0",
     "nodemon": "^2.0.14",
     "rxjs": "~7.5.0",

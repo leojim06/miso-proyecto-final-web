@@ -42,7 +42,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                                                   font-family: 'Londrina Solid', cursive;">Perfil deportivo</h2>
               <div class="card-body shadow-lg" style="background-color:  #1F2833;">
 
-                <form (submit)="userRegistrationProfileSport(f)" #f="ngForm">
+                <form (submit)="userRegistrationProfileSport(albumForm.value)" [formGroup]="albumForm">
                   <label class="lbl-white">Perfil deportivo</label>
                   <div class="row">
                     <div class="col">
@@ -160,7 +160,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                     <button class=" aling-button btn btn-info btn-block" value="Register" type="submit"
-                      [disabled]="f.invalid"
+                      [disabled]="ftp.invalid"
                       style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
                                                               font-family: 'Londrina Solid', cursive; margin-left: auto;">
                       Guardar</button> &nbsp; &nbsp;

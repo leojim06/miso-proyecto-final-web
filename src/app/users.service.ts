@@ -1,5 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { SERVERS } from './models/data.model';
+import { Servers } from './models/servers-class.component';
 
 @Injectable({
   providedIn: 'root'
@@ -7,19 +10,47 @@ import { Injectable } from '@angular/core';
 export class UsersService {
 ad:string= '1635362908540';
 name:string="";
-  constructor(public http : HttpClient,) {
+auth_token:string;
+
+  constructor(public http : HttpClient) {
+    this.auth_token =   localStorage.getItem('loggedtoken');
    }
 
   doUserRegistration(data:any)
   {
     return this.http.post<string>("http://35.244.246.183/usuario/", data);
   }
+
   doUserLogin(data:any)
   {
     console.log('doUserLogin', data);
     return this.http.post<any>("http://35.244.246.183/autenticador/auth", {username: data.uemail, password: data.userpass});
   }
 
+
+  doUserGetProfileSport(idUsuario:number){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    return this.http.get<Error>("http://35.244.246.183/perfil-deportivo/" + idUsuario, { headers: headers });
+  }
+
+
+  doUserRegistrationProfileSport(data:any, idUsuario:number)
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    return this.http.post<string>("http://35.244.246.183/perfil-deportivo/" + idUsuario, data, { headers: headers });
+  }
+
+  
+  getServers(): Observable<Servers> {
+    return of(SERVERS);
+  }
+  
 
 
   isAdmin(){
