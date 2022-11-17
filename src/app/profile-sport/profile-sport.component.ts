@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -72,8 +72,30 @@ export class ProfileSportComponent implements OnInit {
     public activeRoute: ActivatedRoute,
     public pac: PackService,
     public rooter:Router,
-    public utilServ: UtilService
-  ) {}
+    public utilServ: UtilService,
+    private formBuilder: FormBuilder
+  ) {
+
+    console.log('constructorrrrr')
+           /*
+    Servicio de deportes
+    */
+    this.utilServ.doListSport().subscribe(
+      (data: Sport[]) => {
+        console.log('deportes', data)
+        this.sports = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+
+    this.albumForm = this.formBuilder.group({
+      vo2Max: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      ftpActual: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      })
+
+  }
 
   countries = [{
     id: 1, name: 'France', cities: ['Paris', 'Marseille', 'Nice']
@@ -91,20 +113,68 @@ export class ProfileSportComponent implements OnInit {
 
     this.idDeportista =parseInt(localStorage.getItem('loggeduser'));
 
+    
+    console.log('ngOnInit')
+
     /*
       Consulta si tiene información  del perfil deportivo
     */
     this.userSer.doUserGetProfileSport(this.useriid).subscribe(
       (data: any) => {
         console.log('doUserGetProfileSport', data);
-        this.codeError = data.statusCode;
+
+        if(data != undefined) {
+       
+        this.albumForm = this.formBuilder.group({
+          vo2Max: [
+            data.vo2Max,
+            [
+              Validators.required,
+              Validators.minLength(1),
+              Validators.maxLength(128),
+            ],
+          ],
+          ftpActual:[
+            data.ftpActual,
+            [
+              Validators.required,
+              Validators.minLength(1),
+              Validators.maxLength(128),
+            ],
+          ],
+          hasslee:[
+            data.molestias,
+            [
+              Validators.required,
+              Validators.minLength(1),
+              Validators.maxLength(128),
+            ],
+          ],
+          lesion:[
+            data.lesiones,
+            [
+              Validators.required,
+              Validators.minLength(1),
+              Validators.maxLength(128),
+            ],
+          ],
+        });
+
+        this.historysport = data.historiasDeportivas; 
+
+          for (let index = 0; index < data.historiasDeportivas.length; index++) {
+            const element = data.historiasDeportivas[index];
+            console.log('Sport', this.sports);
+            console.log('pruebasss',this.sports?.filter(x => x.id == data.historiasDeportivas[index].idDeporte)[0].descripcion);
+            this.historysport[index].deporte = this.sports?.filter(x => x.id == data.historiasDeportivas[index].idDeporte)[0].descripcion
+          }
+      
+          console.log('consultaaaDatos', this.historysport)
+        }
       },
-      (error: any) => {
-        console.log('doUserGetProfileSport', error);
-        this.codeError = error.status;
-        console.log('codeError', this.codeError);
-      }
+
     );
+
 
 
     /*
@@ -132,20 +202,6 @@ export class ProfileSportComponent implements OnInit {
         console.log(error);
       }
     );
-
-       /*
-    Servicio de deportes
-    */
-    this.utilServ.doListSport().subscribe(
-      (data: Sport[]) => {
-        console.log('deportes', data)
-        this.sports = data;
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-
 
     this.userSer.getloggedUserData(this.useriid).subscribe(
       (data: any[]) => {
@@ -228,15 +284,15 @@ export class ProfileSportComponent implements OnInit {
   }
 
 
-  userRegistrationProfileSport(form:NgForm)
+  userRegistrationProfileSport(form:ProfileSport)
   {
     console.log("User Registered");
     // form.value.date=this.date;
-    console.log(form.value);
+    console.log(form.vo2Max);
 
     this.profileSport.idDeportista = this.idDeportista;
-    this.profileSport.vo2Max = form.value.vo2Max;
-    this.profileSport.ftpActual = form.value.ftpActual;
+    this.profileSport.vo2Max = form.vo2Max;
+    this.profileSport.ftpActual = form.ftpActual;
     this.profileSport.molestias = this.arrayHasslee;
     this.profileSport.lesiones = this.arrayLesion;
     this.profileSport.historiasDeportivas = this.historysport;
@@ -253,7 +309,7 @@ export class ProfileSportComponent implements OnInit {
 
       this.msg = data;
 
-      form.reset();
+      this.albumForm.reset();
 
     }, (error:any)=>{
 

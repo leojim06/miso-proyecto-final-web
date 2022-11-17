@@ -8,3 +8,4 @@ export interface ProfileSport {
   historiasDeportivas: HistorySport[];
   idDeportista: number;
 }
+

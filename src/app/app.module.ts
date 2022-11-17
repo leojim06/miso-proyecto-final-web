@@ -25,6 +25,7 @@ import { ProfileBasicComponent } from './profile-basic/profile-basic.component';
 import { SportPreferenceComponent } from './sport-preference/sport-preference.component';
 import { ProfileSportComponent } from './profile-sport/profile-sport.component';
 import { ToastrModule } from 'ngx-toastr';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ToastrModule } from 'ngx-toastr';
     ContactComponent,
     ProfileBasicComponent,
     SportPreferenceComponent,
-    ProfileSportComponent
+    ProfileSportComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
