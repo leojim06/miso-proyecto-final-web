@@ -138,7 +138,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                             <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               
                               <span cacheSVG="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                              class="svg-icon svg-icon-md svg-icon-primary">Editar
+                              class="svg-icon svg-icon-md svg-icon-primary"  (click)="editHistorySport(sport.id)">Editar
                             </span>
                               <!-- <span cacheSVG="true"
                               class="svg-icon svg-icon-md svg-icon-primary"> 
@@ -189,7 +189,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                           <div class="col">
                             <label for="lname">Deporte</label>
                             <div class="form-floating mb-3">
-                        <select name="city" class="rounded-inputs20 select-select col-md-3" (change)="onChangeSport($event.target)">
+                        <select name="city" class="rounded-inputs20 select-select col-md-3"  [(ngModel)]="sportSelected"  (change)="onChangeSport($event.target)">
                           <option> --Seleccione-- </option>
                           <option *ngFor="let sport of sports"  [value]="sport.id" name="sport.descripcion">{{sport.descripcion}}</option>
                           </select>

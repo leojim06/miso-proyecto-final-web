@@ -66,6 +66,7 @@ export class ProfileSportComponent implements OnInit {
   codeError: number;
   servers: Servers;
   albumForm!: FormGroup;
+  sportSelected: any;
 
   constructor(
     public userSer: UsersService,
@@ -110,6 +111,17 @@ export class ProfileSportComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.useriid);
+
+    
+    this.utilServ.doListSport().subscribe(
+      (data: Sport[]) => {
+        console.log('deportes', data)
+        this.sports = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
 
     this.idDeportista =parseInt(localStorage.getItem('loggeduser'));
 
@@ -245,6 +257,16 @@ export class ProfileSportComponent implements OnInit {
     console.log('datostabla', this.historysport);
   }
 
+  editHistorySport(id: number){
+    console.log('position', id);
+   
+    this.sportSelected = this.historysport?.filter(x => x.id == id)[0].idDeporte;
+    this.edad = this.historysport?.filter(x => x.id == id)[0].edadInicioPractica;
+    this.favoriteSeason = "No";
+    // this.historysport = this.historysport.splice(id,1);
+     console.log('positionSports', this.historysport);
+  }
+  
   deleteHistorySport(id: number){
     console.log('position', id);
     this.historysport = this.historysport.filter(x => x.id !== id);
