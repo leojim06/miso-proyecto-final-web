@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
 
     },(error:any)=>{
       console.log(error);
-      this.msg="Algo salió mal";
+      // this.msg="Algo salió mal";
     })
   }
 
