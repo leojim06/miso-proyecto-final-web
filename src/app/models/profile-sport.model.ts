@@ -9,3 +9,9 @@ export interface ProfileSport {
   idDeportista: number;
 }
 
+export interface ProfileFood {
+  alimentosNoTolereados: any[];
+  alimentosPreferencia: any[];
+  tipoDieta: number;
+}
+

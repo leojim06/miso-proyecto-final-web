@@ -28,6 +28,25 @@ auth_token:string;
   }
 
 
+  doCreateUserRegistrationProfile(data:any, idUsuario:number)
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    return this.http.post<string>("http://35.244.246.183/perfil-demografico/" + idUsuario, data, { headers: headers });
+  }
+
+  doUserGetRegistrationProfile(idUsuario:number){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    return this.http.get<Error>("http://35.244.246.183/perfil-demografico/" + idUsuario, { headers: headers });
+  }
+
+
+
   doUserGetProfileSport(idUsuario:number){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -37,7 +56,7 @@ auth_token:string;
   }
 
 
-  doUserRegistrationProfileSport(data:any, idUsuario:number)
+  doCreateUserRegistrationProfileSport(data:any, idUsuario:number)
   {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -45,6 +64,52 @@ auth_token:string;
     })
     return this.http.post<string>("http://35.244.246.183/perfil-deportivo/" + idUsuario, data, { headers: headers });
   }
+
+  doUpdateUserRegistrationProfileSport(data:any, idUsuario:number)
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    console.log('pruebas');
+    return this.http.put<string>("http://35.244.246.183/perfil-deportivo/" + idUsuario, data, { headers: headers });
+  }
+
+ ////////////////////7
+
+ 
+ doUserGetProfileFood(idUsuario:number){
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer '+ this.auth_token
+  })
+  return this.http.get<Error>("http://35.244.246.183/perfil-alimenticio/" + idUsuario, { headers: headers });
+}
+
+
+doCreateUserRegistrationProfileFood(data:any, idUsuario:number)
+{
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer '+ this.auth_token
+  })
+  return this.http.post<string>("http://35.244.246.183/perfil-alimenticio/" + idUsuario, data, { headers: headers });
+}
+
+doUpdateUserRegistrationProfileFood(data:any, idUsuario:number)
+{
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer '+ this.auth_token
+  })
+  console.log('pruebas');
+  return this.http.put<string>("http://35.244.246.183/perfil-alimenticio/" + idUsuario, data, { headers: headers });
+}
+
+
+
+
+
 
   
   getServers(): Observable<Servers> {
@@ -66,9 +131,13 @@ auth_token:string;
     return this.http.get<any[]>("http://localhost:3000/allusers");
 
   }
-  getloggedUserData(userid:string)
+  getloggedUserData(userid:number)
   {
-    return this.http.get<any[]>("http://localhost:3000/profile/"+userid);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    return this.http.get<any>("http://35.244.246.183/gestion-planes/"+userid, { headers: headers });
   }
 
   uemailcheckAvail(uemail:string)
@@ -88,9 +157,14 @@ auth_token:string;
     return this.http.put<string>("http://localhost:3000/updateuser/",data);
   }
 
-  addpackages(data:any)
+  addpackages(data:any, idUsuario:number)
   {
-    return this.http.put<string>("http://localhost:3000/cart/",data);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    console.log('service', data);
+    return this.http.post<string>("http://35.244.246.183/gestion-planes/"+ idUsuario, data, { headers: headers });
   }
 
   deleteUserData(userid:number)
@@ -100,6 +174,11 @@ auth_token:string;
   searchUsers(searchtxt:string)
   {
     return this.http.get<any[]>("http://localhost:3000/searchuser/"+searchtxt);
+  }
+
+  doPartherRegistration(data:any)
+  {
+    return this.http.post<any>("http://35.244.246.183/socios-negocio/", data);
   }
 
 

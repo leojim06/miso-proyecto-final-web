@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ToastPackage } from 'ngx-toastr';
+import { Package } from '../models/package.model';
 
 @Component({
   selector: 'app-cart',
@@ -39,9 +41,17 @@ export class CartComponent implements OnInit {
   isnottax: boolean;
   val: string;
   coup: string;
+  listComplements: Array<any> = [];
 
   packname = localStorage.getItem('packna');
   packdesc = localStorage.getItem('packds');
+  idDeportista: number;
+  package: Package = { 
+    idMedioPago: null,
+    idTipoSuscripcion: null,
+    idNivel: null,
+    complementos: null
+  }
 
   constructor(
     public activeRoute: ActivatedRoute,
@@ -56,6 +66,9 @@ export class CartComponent implements OnInit {
     this.activeRoute.params.subscribe((param: Params) => {
       console.log(param.userid);
     });
+
+    this.idDeportista = parseInt(localStorage.getItem('loggeduser'));
+
   }
 
   bath(event: any) {
@@ -123,7 +136,8 @@ export class CartComponent implements OnInit {
   }
 
   packCb(form: NgForm) {
-    console.log('Package Registered');
+
+    console.log('Package Registered', form.value);
     console.log(form.value);
     var stringToConvert = localStorage.getItem('loggeduser');
     var numberValue = Number(stringToConvert);
@@ -133,7 +147,43 @@ export class CartComponent implements OnInit {
     form.value.coupon = this.coup;
     form.value.date = this.date;
     form.value.pack = this.packn;
-    this.userSer.addpackages(form.value).subscribe(
+
+    if(this.packn == 'Plan Intermedio'){
+      this.package.idTipoSuscripcion = 2;
+    }else if (this.packn == 'Plan Gratis'){
+      this.package.idTipoSuscripcion = 1;
+    }else if  (this.packn == 'Plan Premium'){
+      this.package.idTipoSuscripcion = 3;
+    }
+
+    if(form.value.level == 'Beginner'){
+      this.package.idNivel = 1;
+    }else if(form.value.level == 'Intermediate'){
+      this.package.idNivel = 2;
+    }else if(form.value.level == 'Advanced'){
+      this.package.idNivel = 3;
+    }
+
+    
+    if(form.value.payment == 'Gpay'){
+      this.package.idMedioPago = 1;
+    }else if(form.value.level == 'Upi'){
+      this.package.idMedioPago = 2;
+    }
+
+    if(form.value.isdietplan == true){
+      this.listComplements.push(1);
+    }
+    if(form.value.istrain == true){
+      this.listComplements.push(2);
+    }
+    if(form.value.isbath == true){
+      this.listComplements.push(3);
+    }
+
+    this.package.complementos = this.listComplements;
+
+    this.userSer.addpackages(this.package, this.idDeportista).subscribe(
       (data: string) => {
         this.msg = data;
         form.reset();

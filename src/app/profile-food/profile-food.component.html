@@ -39,15 +39,28 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
             <div class="card-header " style="background-color:  #c5c6c7;">
               <h2 style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
-                                                  font-family: 'Londrina Solid', cursive;">Deportes de preferencia</h2>
+                                                  font-family: 'Londrina Solid', cursive;">Perfil alimenticio</h2>
               <div  class="card-body shadow-lg" style="background-color:  #1F2833;">
 
                 <form (submit)="userRegistrationProfileSport(albumForm.value)" [formGroup]="albumForm">
-          
+             
+                    <div class="form-floating mb-3">
+                <select class="custom-select form-control" formControlName="tipoDieta"  [(ngModel)]="sportSelected"  (change)="onChangeSport($event.target)">
+                    <option [value]="sinSeleccionar"> --Seleccione-- </option>
+                    <option *ngFor="let sport of categorias"  [value]="sport.id" name="sport.descripcion">{{sport.descripcion}}</option>
+                    </select>
+                <label for="inputApellido">Tipo dieta</label>
+              </div>
+        
+                  <!-- <p class="alert alert-danger" *ngIf="fvo2max.errors?.required && fvo2max.touched">Por favor
+                    ingrese los valor del perfil deportivo</p>
+                  <p class="alert alert-danger" *ngIf="fvo2max.errors?.minlength && fvo2max.touched">Por favor
+                    ingrese mínimo 3 caracteres.</p> -->
+
                   <div class="row">
                     <div class="col">
 
-                      <label class="lbl-white">Deportes</label>
+                      <label class="lbl-white">Alimentos no tolerados</label>
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
                       <div class="form-check" *ngFor="let item of hasslee; index as i" >
 
@@ -65,6 +78,22 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       seleccione una molestia</p> -->
                   </div>
 
+                  <div class="row">
+                    <div class="col">
+
+                      <label class="lbl-white">Alimentos de preferencia</label>
+                      <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
+                      <div class="form-check" *ngFor="let item of lesion ; index as i">
+                        <input class="form-check-input" formControlName="lesionfn" type="checkbox" name="lesion" value="{{item.id}}"
+                          id="flexRadioDefault1"  [checked]="categoryLesion[i]"   (change)="checkChangeLesion(item.id)"  required>
+                        <label class="form-check-label" for="flexRadioDefault1"
+                          style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
+                          {{item.descripcion}} </label>
+
+                      </div>
+
+                    </div>
+                  </div>
 
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                     <button class=" aling-button btn btn-info btn-block" value="Register" type="submit"

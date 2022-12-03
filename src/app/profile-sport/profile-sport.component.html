@@ -73,7 +73,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
                       <div class="form-check" *ngFor="let item of hasslee; index as i" >
 
-                        <input class="form-check-input" formControlName="hasslee" type="checkbox" name="hasslee" value="{{item.id}}"
+                        <input class="form-check-input" formControlName="hassleefn" type="checkbox" name="hassleefn" value="{{item.id}}"
                           id="flexRadioDefault1" [checked]="categoryHasslee[i]"   (change)="checkChangeHasslee(item.id)" required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
@@ -93,7 +93,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       <label class="lbl-white">Lesiones o incapacidades</label>
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
                       <div class="form-check" *ngFor="let item of lesion ; index as i">
-                        <input class="form-check-input" formControlName="lesion" type="checkbox" name="lesion" value="{{item.id}}"
+                        <input class="form-check-input" formControlName="lesionfn" type="checkbox" name="lesion" value="{{item.id}}"
                           id="flexRadioDefault1"  [checked]="categoryLesion[i]"   (change)="checkChangeLesion(item.id)"  required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
@@ -109,7 +109,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                   <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm" style="margin-left: 49%;">
                     <span cacheSVG="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                      class="svg-icon svg-icon-md svg-icon-danger">Agregar
+                      class="svg-icon svg-icon-md svg-icon-danger" (click)="addHistorySport()">Agregar
                     </span>
                   </a>
 
@@ -181,7 +181,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Agregar Historia deportiva</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">{{lblTittleModal}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -190,7 +190,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                             <label for="lname">Deporte</label>
                             <div class="form-floating mb-3">
                         <select name="city" class="rounded-inputs20 select-select col-md-3"  [(ngModel)]="sportSelected"  (change)="onChangeSport($event.target)">
-                          <option> --Seleccione-- </option>
+                          <option [value]="sinSeleccionar"> --Seleccione-- </option>
                           <option *ngFor="let sport of sports"  [value]="sport.id" name="sport.descripcion">{{sport.descripcion}}</option>
                           </select>
 
@@ -215,7 +215,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                             <div *ngFor="let option of optionsPlan; let i = index">
                               <input id="season{{i}}" name="seasons" type="radio"
-                                [value]="option.id" [(ngModel)]="favoriteSeason" />
+                                [value]="option.id" [(ngModel)]="favoriteSeason"/>
                               <label for="">{{option.nombre}}</label>
                             </div>
                           </div>
@@ -225,7 +225,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="ftpActual" type="number"
+                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="anio" type="number"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Años de practica</label>
                               </div>
@@ -236,7 +236,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="ftpActual" type="number"
+                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="horaSemana" type="number"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Dedicación semana</label>
                               </div>
@@ -247,7 +247,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="ciudad" name="ftpActual" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="ciudad" name="ciudad" type="text"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Ciudad</label>
                               </div>

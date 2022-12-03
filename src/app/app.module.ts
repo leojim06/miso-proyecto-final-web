@@ -26,6 +26,11 @@ import { SportPreferenceComponent } from './sport-preference/sport-preference.co
 import { ProfileSportComponent } from './profile-sport/profile-sport.component';
 import { ToastrModule } from 'ngx-toastr';
 import { EventsComponent } from './events/events.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PartnerComponent } from './partner/partner.component';
+import { WelcomePartnerComponent } from './welcome-partner/welcome-partner.component';
+import { ProfileFoodComponent } from './profile-food/profile-food.component';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +53,10 @@ import { EventsComponent } from './events/events.component';
     ProfileBasicComponent,
     SportPreferenceComponent,
     ProfileSportComponent,
-    EventsComponent
+    EventsComponent,
+    PartnerComponent,
+    WelcomePartnerComponent,
+    ProfileFoodComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +71,7 @@ import { EventsComponent } from './events/events.component';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,6 +18,10 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileBasicComponent } from './profile-basic/profile-basic.component';
 import { SportPreferenceComponent } from './sport-preference/sport-preference.component';
 import { ProfileSportComponent } from './profile-sport/profile-sport.component';
+import { EventsComponent } from './events/events.component';
+import { PartnerComponent } from './partner/partner.component';
+import { WelcomePartnerComponent } from './welcome-partner/welcome-partner.component';
+import { ProfileFoodComponent } from './profile-food/profile-food.component';
 
 const routes: Routes = [
    {path:"",component:SlideComponent},
@@ -33,8 +37,13 @@ const routes: Routes = [
    {path:"adduser", component:AdduserComponent,canActivate:[AdminGuard]},
    {path:"profile-basic", component:ProfileBasicComponent, canActivate:[AuthGuard]},
    {path:"profile-sport", component:ProfileSportComponent, canActivate:[AuthGuard]},
-
    {path:"sport-preference", component:SportPreferenceComponent, canActivate:[AuthGuard]},
+   {path:"events", component:EventsComponent, canActivate:[AuthGuard]},
+   {path:"register-partner", component:PartnerComponent},
+   {path:"welcome-partner", component:WelcomePartnerComponent, canActivate:[AuthGuard]},
+   {path:"profile-food", component:ProfileFoodComponent, canActivate:[AuthGuard]},
+   
+
    {path:"**",component:NotfoundComponent}
 
 ];

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -28,10 +28,11 @@ export class PackService {
   namee=localStorage.getItem("loggedusernamee");
   gender=localStorage.getItem("loggedusergen");
   age=localStorage.getItem("loggeduserage");
-
+  auth_token:string;
 
   constructor(public http:HttpClient,public rooter: Router) {
     console.log("service created");
+    this.auth_token =   localStorage.getItem('loggedtoken');
   }
   calisBuy(){
     this.packname=this.calisThen;
@@ -75,6 +76,19 @@ export class PackService {
   //   localStorage.setItem("packds",this.packdesc);
   //   this.rooter.navigateByUrl("/cart")
   // }
+
+
+  getEvents()
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+ this.auth_token
+    })
+    return this.http.get<any[]>("http://35.244.246.183/evento/");
+  }
+
+
+  
 
 
 

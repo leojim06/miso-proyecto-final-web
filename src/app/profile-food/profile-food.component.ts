@@ -10,18 +10,18 @@ import { Hassle } from '../models/hassle.model';
 import { Sport } from '../models/sport-model';
 import { HistorySport } from '../models/history-sport.model';
 import { Observable, VirtualTimeScheduler } from 'rxjs';
-import { ProfileSport } from '../models/profile-sport.model';
+import { ProfileFood, ProfileSport } from '../models/profile-sport.model';
 import { ErrorHttp } from '../models/errorHttp.model';
 import { Servers } from '../models/servers-class.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-profile-sport',
-  templateUrl: './profile-sport.component.html',
-  styleUrls: ['./profile-sport.component.css']
+  selector: 'app-profile-food',
+  templateUrl: './profile-food.component.html',
+  styleUrls: ['./profile-food.component.css']
 })
-export class ProfileSportComponent implements OnInit {
+export class ProfileFoodComponent implements OnInit {
   msg: string;
   uuseremailavail = false;
   date = new Date();
@@ -61,7 +61,7 @@ export class ProfileSportComponent implements OnInit {
   arrayHasslee: Array<any> = [];
   categoryHasslee: any = []
   categoryLesion: any = []
-  profileSport: ProfileSport = { idDeportista: null, vo2Max: null, ftpActual: null, lesiones: null, molestias: null, historiasDeportivas: null };
+  profileSport: ProfileFood = { tipoDieta: null, alimentosNoTolereados: null, alimentosPreferencia: null };
   idDeportista: number;
   codeError: number;
   servers: Servers;
@@ -70,6 +70,7 @@ export class ProfileSportComponent implements OnInit {
   lblTittleModal: string = 'Agregar Historia deportiva';
   sinSeleccionar: any = 0;
   idDeportistaConsulta: number;
+  categorias: Sport[];
 
   constructor(
     public userSer: UsersService,
@@ -77,7 +78,8 @@ export class ProfileSportComponent implements OnInit {
     public pac: PackService,
     public rooter: Router,
     public utilServ: UtilService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private utilService: UtilService
   ) {
 
     console.log('constructorrrrr')
@@ -86,8 +88,7 @@ export class ProfileSportComponent implements OnInit {
     this.albumForm = this.formBuilder.group({
       hassleefn: new FormControl('', [Validators.required]),
       lesionfn: new FormControl('', [Validators.required]),
-      vo2Max: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-      ftpActual: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      tipoDieta: new FormControl('', [Validators.required, Validators.maxLength(20)])
     })
     this.utils();
 
@@ -120,7 +121,7 @@ export class ProfileSportComponent implements OnInit {
     // );
 
     this.idDeportista = parseInt(localStorage.getItem('loggeduser'));
-
+    this.consultarTiposDieta();
 
     console.log('ngOnInit')
 
@@ -149,16 +150,8 @@ export class ProfileSportComponent implements OnInit {
 
 
           this.albumForm = this.formBuilder.group({
-            vo2Max: [
-              data.vo2Max,
-              [
-                Validators.required,
-                Validators.minLength(1),
-                Validators.maxLength(128),
-              ],
-            ],
-            ftpActual: [
-              data.ftpActual,
+            tipoDieta: [
+              data.tipoDieta,
               [
                 Validators.required,
                 Validators.minLength(1),
@@ -166,13 +159,13 @@ export class ProfileSportComponent implements OnInit {
               ],
             ],
             hassleefn: [
-              data.molestias[0],
+              data.alimentosNoTolereados[0],
               [
                 Validators.required,
               ],
             ],
             lesionfn: [
-              data.lesiones[0],
+              data.alimentosPreferencia[0],
               [
                 Validators.required,
               ],
@@ -302,26 +295,22 @@ export class ProfileSportComponent implements OnInit {
   }
 
 
-  userRegistrationProfileSport(form: ProfileSport) {
+  userRegistrationProfileSport(form: ProfileFood) {
     console.log("User Registered");
     // form.value.date=this.date;
-    console.log(form.vo2Max);
 
-    this.profileSport.idDeportista = this.idDeportista;
-    this.profileSport.vo2Max = form.vo2Max;
-    this.profileSport.ftpActual = form.ftpActual;
-    this.profileSport.lesiones = this.arrayLesion;
-    this.profileSport.molestias = this.arrayHasslee;
-    this.profileSport.historiasDeportivas = this.historysport;
+    this.profileSport.alimentosNoTolereados = this.arrayLesion;
+    this.profileSport.alimentosPreferencia = this.arrayHasslee;
+    this.profileSport.tipoDieta = this.idDeporteSeleccionado;
 
     console.log('register-sport', this.profileSport);
 
 
-    this.rooter.navigateByUrl("/login")
+   // this.rooter.navigateByUrl("/login")
 
     if (this.idDeportistaConsulta == undefined || this.idDeportistaConsulta == null) {
-      this.userSer.doCreateUserRegistrationProfileSport(this.profileSport, this.profileSport.idDeportista).subscribe((data: string) => {
-        console.log(data);
+      this.userSer.doCreateUserRegistrationProfileFood(this.profileSport, this.idDeportista).subscribe((data: string) => {
+        console.log('doCreateUserRegistrationProfileFood0',data);
         this.msg = data;
         this.albumForm.reset();
       }, (error: any) => {
@@ -329,7 +318,7 @@ export class ProfileSportComponent implements OnInit {
         this.msg = "Something Went Wrong!!";
       });
     } else {
-      this.userSer.doUpdateUserRegistrationProfileSport(this.profileSport, this.profileSport.idDeportista).subscribe((data: string) => {
+      this.userSer.doUpdateUserRegistrationProfileFood(this.profileSport, this.idDeportista).subscribe((data: string) => {
         console.log(data);
         this.msg = data;
         this.albumForm.reset();
@@ -381,9 +370,9 @@ export class ProfileSportComponent implements OnInit {
     /*
     Servicio de molestias
     */
-    this.utilServ.doListHassle().subscribe(
+    this.utilServ.doListAlimentos().subscribe(
       (data: Hassle[]) => {
-        console.log('molestias', data)
+        console.log('alimentos', data)
         this.hasslee = data;
       },
       (error: any) => {
@@ -394,9 +383,9 @@ export class ProfileSportComponent implements OnInit {
     /*
     Servicio de lesiones
     */
-    this.utilServ.doListLesion().subscribe(
+    this.utilServ.doListAlimentos().subscribe(
       (data: Lesion[]) => {
-        console.log('lesiones', data)
+        console.log('alimentos', data)
         this.lesion = data;
       },
       (error: any) => {
@@ -404,4 +393,18 @@ export class ProfileSportComponent implements OnInit {
       }
     );
   }
+
+  consultarTiposDieta() {
+    this.utilService.doListDieta().subscribe(
+      (data: Sport[]) => {
+        console.log('consultasComplements', data)
+        this.categorias = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+
 }
