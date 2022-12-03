@@ -18,7 +18,7 @@ export class ManagerComponent implements OnInit {
       this.users = data;
     }, (error: any) => {
 
-      this.msg = "Algo salió mal"
+      // this.msg = "Algo salió mal"
     });
   }
 

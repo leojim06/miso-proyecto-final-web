@@ -128,26 +128,13 @@ export class ProfileFoodComponent implements OnInit {
     /*
       Consulta si tiene información  del perfil deportivo
     */
-    this.userSer.doUserGetProfileSport(this.useriid).subscribe(
+    this.userSer.doUserGetProfileFood(this.useriid).subscribe(
       (data: any) => {
         this.utils();
         console.log('doUserGetProfileSport', data);
         this.idDeportistaConsulta = data.idDeportista;
         console.log('idDeportistaConsulta', this.idDeportistaConsulta);
         if (data != undefined) {
-
-          for (let index = 0; index < data.lesiones.length; index++) {
-            // if(data.lesiones[index] == 1){
-            data.lesiones[index] === 1 ? true : false;
-            // }
-          }
-
-          for (let index = 0; index < data.molestias.length; index++) {
-            // if(data.lesiones[index] == 1){
-            data.molestias[index] === 1 ? true : false;
-            // }
-          }
-
 
           this.albumForm = this.formBuilder.group({
             tipoDieta: [
