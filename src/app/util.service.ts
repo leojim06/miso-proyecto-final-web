@@ -34,4 +34,54 @@ export class UtilService {
  {
    return this.http.get<Sport[]>("http://35.244.246.183/deportes/");
  }
+
+    /*
+ Listar Niveles
+  */
+ doListNivel()
+ {
+   return this.http.get<Sport[]>("http://35.244.246.183/niveles-plan/");
+ }
+
+     /*
+ Listar Suscripciones
+  */
+ doListSubscripcion()
+ {
+   return this.http.get<Sport[]>("http://35.244.246.183/suscripciones/");
+ }
+
+/*
+ Listar Complementos
+ */
+doListComplementsPlan()
+{
+  return this.http.get<Sport[]>("http://35.244.246.183/complementos-plan/");
 }
+
+/*
+ Listar Categorias
+ */
+ doListCategorias()
+ {
+   return this.http.get<Sport[]>("http://35.244.246.183/categorias-socio/");
+ }
+
+
+ /*
+ Listar Categorias
+ */
+ doListDieta()
+ {
+   return this.http.get<Sport[]>("http://35.244.246.183/tipos-dietas/");
+ }
+
+  /*
+ Listar Categorias
+ */
+ doListAlimentos()
+ {
+   return this.http.get<Sport[]>("http://35.244.246.183/alimentos/");
+ }
+
+ }

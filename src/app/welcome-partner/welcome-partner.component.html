@@ -6,25 +6,10 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
     <button class="btn btn  me-md-2" style=" margin: 1vw; color: aqua; background-color:#1F2833 ;">
       <h3>Perfil</h3>
     </button>
-
-    <button class="btn btn-info me-md-2" type="button" routerLink="/profile-basic"
-      style="border:solid #1F2833; margin: 1vw;">Perfil demográfico
-    </button>
-    <button class="btn btn-info me-md-2" type="button" routerLink="/profile-sport"
-    style="border:solid #1F2833; margin: 1vw;">Perfil deportivo
-  </button>
-  <button class="btn btn-info me-md-2" type="button" routerLink="/profile-food"
-  style="border:solid #1F2833; margin: 1vw;">Perfil alimenticio
-</button>
-    <button class="btn btn-info me-md-2" type="button" routerLink="/packages"
-      style="border:solid #1F2833; margin: 1vw;">Planes
-    </button>
-    <button class="btn btn-info me-md-2" type="button" routerLink="/sport-preference"
-      style="border:solid #1F2833; margin: 1vw;">Deporte preferencia
-    </button>
     <button class="btn btn-info me-md-2" type="button" routerLink="/events"
     style="border:solid #1F2833; margin: 1vw;">Eventos
   </button>
+
 
   </div>
   <hr style="height: 2px; margin: 1%;padding: 0; ">
@@ -58,12 +43,12 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
             <img src="assets\packageinfo.png" class="card-img-top"
               style="max-width: 115vh; border-radius: 12px; border: solid 8px rgb(255, 255, 255) ;" alt="loading">
           </div>
-          <h2>Información de tu plan</h2>
+          <h2>Información de tu cuenta como socio</h2>
           <div class="card-body shadow-lg" style="background-color: #c5c6c7; border-radius: 12px;">
-            <h4 class="card-title">Subscripción: {{tiposusbscripcion}}</h4>
-            <h4 class="card-title">Nivel: {{nivel}}</h4>
+            <h1 class="card-title">Tendras la posibilidad de brindar lo mejor de tus servicios a los deportistas</h1>
+            <!-- <h4 class="card-title">Nivel: {{nivel}}</h4> -->
             <hr>
-            <div *ngIf="infoPackage">
+            <!-- <div *ngIf="infoPackage">
               <h4 class="card-title">Complementos</h4>&nbsp; <span *ngIf="relajacion"><img src="assets\hot-tub-solid.svg" height="30vw"
                   style="padding:0.5vh; border-radius: 2px; background-color:aqua;"></span> &nbsp;
               <span *ngIf="entrenador"><img src="assets\hands-helping-solid.svg" height="30vw"
@@ -72,7 +57,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                   style="padding:0.5vh; border-radius: 2px; background-color:orange;"></span>
               <hr>
               <p class="card-text">Comprado en: {{userdata.date |slice :0:10 }} <br></p>
-            </div>
+            </div> -->
             <p class="card-text"><small class="text-muted">SportApp</small></p>
           </div>
         </div>

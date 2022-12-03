@@ -7,7 +7,7 @@ font-family: 'Londrina Solid', cursive;">
 
         <div class="card-header " style="background-color:  #c5c6c7;">
           <h2 style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
-                                              font-family: 'Londrina Solid', cursive;">Registro Deportista</h2>
+                                              font-family: 'Londrina Solid', cursive;">Registro Socio</h2>
           <div class="card-body shadow-lg" style="background-color:  #1F2833;">
 
             <form (submit)="userRegistration(f)" #f="ngForm">
@@ -84,7 +84,7 @@ font-family: 'Londrina Solid', cursive;">
               <div class="form-floating mb-3">
                 <input class="form-control" id="inputNombre" name="nombres"
                  ngModel #nombres="ngModel" placeholder="name@example.com" required nombre />
-                <label for="inputNombre">Nombres</label>
+                <label for="inputNombre">Razón Social</label>
               </div>
               <p class="alert alert-danger" *ngIf="nombres.errors?.required && nombres.touched">Por favor ingrese un nombre valido.</p>
               <p class="alert alert-danger" *ngIf="nombres.errors?.nombre && nombres.touched">Por favor ingrese un nombre valido.
@@ -92,13 +92,13 @@ font-family: 'Londrina Solid', cursive;">
 
 
               <div class="form-floating mb-3">
-                <input class="form-control" id="inputApellido" name="apellidos"
-                   ngModel #apellidos="ngModel" placeholder="name@example.com" required apellido />
-                <label for="inputApellido">Apellidos</label>
+                <select class="custom-select form-control"  [(ngModel)]="sportSelected"  (change)="onChangeSport($event.target)">
+                    <option [value]="sinSeleccionar"> --Seleccione-- </option>
+                    <option *ngFor="let sport of categorias"  [value]="sport.id" name="sport.descripcion">{{sport.descripcion}}</option>
+                    </select>
+                <label for="inputApellido">Categoria de Socio</label>
               </div>
-              <p class="alert alert-danger" *ngIf="apellidos.errors?.required && apellidos.touched">Por favor ingrese un apellido valido.</p>
-              <p class="alert alert-danger" *ngIf="apellidos.errors?.apellido && apellidos.touched">Por favor ingrese un apellido valido.
-              </p>
+        
 
               <div class="form-floating mb-3">
                 <input class="form-control" id="inputEmail" (blur)="uuemailcheck(email.value)" name="email"
@@ -127,7 +127,7 @@ font-family: 'Londrina Solid', cursive;">
           </div>
           <div class="card-footer text-center py-3">
             <div class="small"><a routerLink="/login" style="color:  #1F2833;">¿Tiene cuenta? Iniciar Sesión</a>
-              <h3><a routerLink="/register-partner" style="color:  #1F2833;">¿Quieres registrarte como socio de negocio? Registrar</a></h3>
+              <h3><a routerLink="/register" style="color:  #1F2833;">¿Quieres registrarte como deportista? Registrar</a></h3>
             </div>
           </div>
         </div>

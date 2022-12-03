@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule} from '@angular/common/http';
 import { StorageServiceModule } from 'ngx-webstorage-service';
@@ -24,6 +24,13 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileBasicComponent } from './profile-basic/profile-basic.component';
 import { SportPreferenceComponent } from './sport-preference/sport-preference.component';
 import { ProfileSportComponent } from './profile-sport/profile-sport.component';
+import { ToastrModule } from 'ngx-toastr';
+import { EventsComponent } from './events/events.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PartnerComponent } from './partner/partner.component';
+import { WelcomePartnerComponent } from './welcome-partner/welcome-partner.component';
+import { ProfileFoodComponent } from './profile-food/profile-food.component';
+
 
 @NgModule({
   declarations: [
@@ -45,14 +52,26 @@ import { ProfileSportComponent } from './profile-sport/profile-sport.component';
     ContactComponent,
     ProfileBasicComponent,
     SportPreferenceComponent,
-    ProfileSportComponent
+    ProfileSportComponent,
+    EventsComponent,
+    PartnerComponent,
+    WelcomePartnerComponent,
+    ProfileFoodComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StorageServiceModule
+    StorageServiceModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 7000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

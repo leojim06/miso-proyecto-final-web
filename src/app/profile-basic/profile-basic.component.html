@@ -35,11 +35,11 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                                                   font-family: 'Londrina Solid', cursive;">Perfil demográfico</h2>
               <div class="card-body shadow-lg" style="background-color:  #1F2833;">
 
-                <form (submit)="userRegistration(f)" #f="ngForm">
+                <form (submit)="userRegistration(albumForm.value)" [formGroup]="albumForm">
                   <div class="row">
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputfname" #firstname="ngModel" name="Fname" ngModel
+                        <input class="form-control" formControlName="fname" id="inputName" name="fname" 
                           type="text" placeholder="fname" required minlength="3" />
                         <label for="fname">Nombres</label>
                       </div>
@@ -47,35 +47,36 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputlname" #lastname="ngModel" name="lname" type="text"
-                          placeholder="lname" ngModel required />
-                        <label for="lname">Apellidos</label>
+                        <input class="form-control" formControlName="flastname" id="inputlname" name="flastname" type="text"
+                          placeholder="flastname"  required />
+                        <label for="flastname">Apellidos</label>
                       </div>
                     </div>
                   </div>
-                  <p class="alert alert-danger" *ngIf="firstname.errors?.required && firstname.touched">Por favor
+                  <!-- <p class="alert alert-danger" *ngIf="firstname.errors?.required && firstname.touched">Por favor
                     ingrese los nombres</p>
                   <p class="alert alert-danger" *ngIf="firstname.errors?.minlength && firstname.touched">Por favor
-                    ingrese mínimo 3 caracteres.</p>
+                    ingrese mínimo 3 caracteres.</p> -->
 
                   <div class="row">
                     <div class="col">
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
-
+                      
                       <div class="form-floating mb-3">
-                        <select class="custom-select form-control" id="inputGroupSelect01">
-                          <option selected>Tipo identificación...</option>
-                          <option value="TI">Tarjeta de identidad</option>
-                          <option value="CC">Cedula de ciudadanía</option>
+                        <select class="custom-select form-control" formControlName="tipoIdentificacionSelected" id="inputGroupSelectTipoIdentificacion" (change)="onChangeTypeIdentification($event.target)">
+                          <option [value]="sinSeleccionar"> --Seleccione-- </option>
+                          <option value="1">Tarjeta de identidad</option>
+                          <option value="2">Cedula de ciudadanía</option>00
                         </select>
+                        <label for="lblPaisNacimiento">Tipo Identificación</label>
                       </div>
                     </div>
 
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputlname" #lastname="ngModel" name="lname" type="text"
-                          placeholder="lname" ngModel required />
-                        <label for="lname">No. Identificación</label>
+                        <input class="form-control" formControlName="noIdentification" id="inputNoId" name="noIdentification" type="text"
+                          placeholder="noIdentification"  required />
+                        <label for="noIdentification">No. Identificación</label>
                       </div>
                     </div>
                   </div>
@@ -83,22 +84,27 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                   <div class="row">
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <select class="custom-select form-control" id="inputGroupSelect01">
-                          <option selected>Pais Nacimiento...</option>
-                          <option value="TI">Colombia</option>
-                          <option value="CC">Brasil</option>
+                        <select class="custom-select form-control" formControlName="tipoCountrySelected" id="inputGroupSelectPais" (change)="onChangeCountry($event.target)">
+                          <option [value]="sinSeleccionar"> --Seleccione-- </option>
+                          <option value="CO">Colombia</option>
+                          <option value="BR">Brasil</option>
+                          <option value="UR">Uruguay</option>
+                          <option value="CH">Chile</option>
+                          <option value="VN">Venezuela</option>
+                          <option value="EC">Ecuador</option>
+                          <option value="PR">Peru</option>
+                          <option value="PG">Paraguay</option>
+                          <option value="BL">Bolivia</option>
                         </select>
+                        <label for="lblPaisNacimiento">Pais Nacimiento</label>
                       </div>
                     </div>
 
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <select class="custom-select form-control" id="inputGroupSelect01">
-                          <option selected>Ciudad Nacimiento...</option>
-                          <option value="TI">Bogotá</option>
-                          <option value="CC">Barranquilla</option>
-                          <option value="TI">Medellin</option>
-                        </select>
+                        <input class="form-control" formControlName="ciudadNacimiento" id="inputCiudadNacimiento" name="ciudadNacimiento" type="text"
+                        placeholder="ciudadNacimiento"  required />
+                      <label for="ciudadNacimiento">Ciudad Nacimiento</label>
                       </div>
                     </div>
                   </div>
@@ -106,78 +112,73 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                   <div class="row">
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="age" type="number" placeholder="age" name="userage" ngModel
-                          #userage="ngModel" required />
-                        <label for="age">Edad</label>
+                        <input class="form-control" formControlName="userage" id="age" type="date" placeholder="age" name="userage" 
+                         required />
+                        <label for="age">Fecha Nacimiento</label>
                       </div>
-                      <p class="alert alert-danger" *ngIf="userage.errors?.required && userage.touched">Por favor
+                      <!-- <p class="alert alert-danger" *ngIf="userage.errors?.required && userage.touched">Por favor
                         ingrese la edad
-                      </p>
+                      </p> -->
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" value="male" id="flexRadioDefault1"
-                          ngModel #usergender="ngModel" required>
+                        <input class="form-check-input" type="radio" name="usergenderM" value="M" id="flexRadioDefault1"
+                           formControlName="usergenderM"  required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
                           Masculino </label>
 
                       </div>
                       <div class="form-check" style="margin-top: 10px;">
-                        <input class="form-check-input" type="radio" name="gender" value="female" id="flexRadioDefault2"
-                          ngModel #usergender="ngModel" required>
+                        <input class="form-check-input" type="radio" name="usergenderF" value="F" id="flexRadioDefault2"
+                            formControlName="usergenderF" required>
                         <label class="form-check-label" for="flexRadioDefault2"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%;  text-align: center;">
                           Femenino
                         </label>
                       </div>
                     </div>
-                    <p class="alert alert-danger" *ngIf="usergender.errors?.required && usergender.touched">Por favor
-                      seleccione un genero</p>
+                    <!-- <p class="alert alert-danger" *ngIf="usergender.errors?.required && usergender.touched">Por favor
+                      seleccione un genero</p> -->
                   </div>
 
                   <div class="row">
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputfname" #firstname="ngModel" name="Fname" ngModel
-                          type="text" placeholder="fname" required minlength="3" />
-                        <label for="fname">Peso</label>
+                        <input class="form-control" formControlName="fpeso" id="inputfPeso" name="fpeso" 
+                          type="number" placeholder="fpeso" required minlength="3" />
+                        <label for="fpeso">Peso</label>
                       </div>
                     </div>
 
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputlname" #lastname="ngModel" name="lname" type="text"
-                          placeholder="lname" ngModel required />
-                        <label for="lname">Altura</label>
+                        <input class="form-control" formControlName="faltura" id="inputfAltura" name="faltura" type="number"
+                          placeholder="faltura"  required />
+                        <label for="faltura">Altura</label>
                       </div>
                     </div>
                   </div>
-                  <p class="alert alert-danger" *ngIf="firstname.errors?.required && firstname.touched">Por favor
-                    ingrese los nombres</p>
-                  <p class="alert alert-danger" *ngIf="firstname.errors?.minlength && firstname.touched">Por favor
-                    ingrese mínimo 3 caracteres.</p>
-
+                  <!-- <p class="alert alert-danger" *ngIf="faltura.errors?.required && faltura.touched">Por favor
+                    ingrese la altura</p> -->
 
                   <div class="row">
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <select class="custom-select form-control" id="inputGroupSelect01">
-                          <option selected>Pais residencia...</option>
-                          <option value="TI">Colombia</option>
-                          <option value="CC">Brasil</option>
+                        <select class="custom-select form-control" formControlName="tipoCountryResidenciaSelected" id="inputGroupSelectPaisResidencia" (change)="onChangeCountryResidencia($event.target)">
+                          <option [value]="sinSeleccionar"> --Seleccione-- </option>
+                          <option value="CO">Colombia</option>
+                          <option value="BR">Brasil</option>
                         </select>
+                        <label for="lblPaisResidencia">Pais Residencia</label>
                       </div>
                     </div>
 
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <select class="custom-select form-control" id="inputGroupSelect01">
-                          <option selected>Ciudad residencia...</option>
-                          <option value="TI">Bogotá</option>
-                          <option value="CC">Barranquilla</option>
-                          <option value="TI">Medellin</option>
-                        </select>
+                        <input class="form-control" formControlName="ciudadResidencia" id="inputCiudadResidencia" name="ciudadResidencia" type="text"
+                        placeholder="ciudadResidencia"  required />
+                      <label for="ciudadResidencia">Ciudad Residencia</label>
                       </div>
                     </div>
                   </div>
@@ -186,7 +187,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                     <button class=" aling-button btn btn-info btn-block" value="Register" type="submit"
-                      [disabled]="f.invalid"
+                  
                       style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
                                                               font-family: 'Londrina Solid', cursive; margin-left: auto;">
                       Guardar</button> &nbsp; &nbsp;

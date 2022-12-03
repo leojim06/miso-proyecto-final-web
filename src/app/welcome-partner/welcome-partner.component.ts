@@ -8,11 +8,11 @@ import { UtilService } from '../util.service';
 import { Sport } from '../models/sport-model';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  selector: 'app-welcome-partner',
+  templateUrl: './welcome-partner.component.html',
+  styleUrls: ['./welcome-partner.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class WelcomePartnerComponent implements OnInit {
   msg: string;
 
   userdata: {

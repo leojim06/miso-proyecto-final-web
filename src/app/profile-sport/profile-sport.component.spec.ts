@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -11,7 +11,7 @@ describe('ProfileSportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule, FormsModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, FormsModule, ReactiveFormsModule],
       declarations: [ ProfileSportComponent ]
     })
     .compileComponents();

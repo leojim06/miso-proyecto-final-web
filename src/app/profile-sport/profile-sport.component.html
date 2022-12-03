@@ -40,14 +40,14 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
             <div class="card-header " style="background-color:  #c5c6c7;">
               <h2 style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
                                                   font-family: 'Londrina Solid', cursive;">Perfil deportivo</h2>
-              <div class="card-body shadow-lg" style="background-color:  #1F2833;">
+              <div  class="card-body shadow-lg" style="background-color:  #1F2833;">
 
-                <form (submit)="userRegistrationProfileSport(f)" #f="ngForm">
+                <form (submit)="userRegistrationProfileSport(albumForm.value)" [formGroup]="albumForm">
                   <label class="lbl-white">Perfil deportivo</label>
                   <div class="row">
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputVo2max" #fvo2max="ngModel" name="vo2Max" ngModel
+                        <input class="form-control" formControlName="vo2Max"
                           type="text" placeholder="fname" required minlength="3" />
                         <label for="fname">Vo2 Max</label>
                       </div>
@@ -55,16 +55,16 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                     <div class="col">
                       <div class="form-floating mb-3">
-                        <input class="form-control" id="inputftp" #ftp="ngModel" name="ftpActual" type="text"
-                          placeholder="lname" ngModel required />
+                        <input class="form-control" formControlName="ftpActual" type="text"
+                          placeholder="lname" required />
                         <label for="lname">FTP Actual</label>
                       </div>
                     </div>
                   </div>
-                  <p class="alert alert-danger" *ngIf="fvo2max.errors?.required && fvo2max.touched">Por favor
+                  <!-- <p class="alert alert-danger" *ngIf="fvo2max.errors?.required && fvo2max.touched">Por favor
                     ingrese los valor del perfil deportivo</p>
                   <p class="alert alert-danger" *ngIf="fvo2max.errors?.minlength && fvo2max.touched">Por favor
-                    ingrese mínimo 3 caracteres.</p>
+                    ingrese mínimo 3 caracteres.</p> -->
 
                   <div class="row">
                     <div class="col">
@@ -73,7 +73,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
                       <div class="form-check" *ngFor="let item of hasslee; index as i" >
 
-                        <input class="form-check-input" type="checkbox" name="hasslee" value="{{item.id}}"
+                        <input class="form-check-input" formControlName="hassleefn" type="checkbox" name="hassleefn" value="{{item.id}}"
                           id="flexRadioDefault1" [checked]="categoryHasslee[i]"   (change)="checkChangeHasslee(item.id)" required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
@@ -93,7 +93,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       <label class="lbl-white">Lesiones o incapacidades</label>
                       <!-- <label for="fname" style="color: white;">Tipo identificación</label> -->
                       <div class="form-check" *ngFor="let item of lesion ; index as i">
-                        <input class="form-check-input" type="checkbox" name="lesion" value="{{item.id}}"
+                        <input class="form-check-input" formControlName="lesionfn" type="checkbox" name="lesion" value="{{item.id}}"
                           id="flexRadioDefault1"  [checked]="categoryLesion[i]"   (change)="checkChangeLesion(item.id)"  required>
                         <label class="form-check-label" for="flexRadioDefault1"
                           style="background-color: whitesmoke; border-radius: 3px; width: 50%; text-align: center;">
@@ -109,7 +109,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                   <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm" style="margin-left: 49%;">
                     <span cacheSVG="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                      class="svg-icon svg-icon-md svg-icon-danger">Agregar
+                      class="svg-icon svg-icon-md svg-icon-danger" (click)="addHistorySport()">Agregar
                     </span>
                   </a>
 
@@ -134,13 +134,17 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                           <td class="lbl-white">{{ sport.dedicacionHorasSemana }}</td>
                           <td class="lbl-white">{{ sport.ciudad }}</td>
                           <td>
-                            <!-- edit -->
+                        
                             <a title="Edit customer" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
-                              <span cacheSVG="true"
-                              class="svg-icon svg-icon-md svg-icon-primary"> Editar
+                              
+                              <span cacheSVG="true" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                              class="svg-icon svg-icon-md svg-icon-primary"  (click)="editHistorySport(sport.id)">Editar
                             </span>
+                              <!-- <span cacheSVG="true"
+                              class="svg-icon svg-icon-md svg-icon-primary"> 
+                            </span> -->
                             </a>
-                            <!-- delete -->
+                      
                             <a title="Delete customer" class="btn btn-icon btn-light btn-hover-danger btn-sm">
                               <span cacheSVG="true" (click)="deleteHistorySport(sport.id)"
                                 class="svg-icon svg-icon-md svg-icon-danger"> Eliminar
@@ -154,13 +158,11 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                     </table>
 
                   </div>
-                  <!-- end: Table -->
-
 
 
                   <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                     <button class=" aling-button btn btn-info btn-block" value="Register" type="submit"
-                      [disabled]="f.invalid"
+            
                       style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
                                                               font-family: 'Londrina Solid', cursive; margin-left: auto;">
                       Guardar</button> &nbsp; &nbsp;
@@ -168,7 +170,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                       style="text-align: center; font-family: 'Big Shoulders Stencil Display', cursive;
                                                               font-family: 'Londrina Solid', cursive; background-color: #FF4447;">
                       Cancelar</button>
-                    <h5 style="color: rgb(255, 30, 0);">{{msg}}</h5>
+                    <!-- <h5 style="color: rgb(255, 30, 0);">{{msg}}</h5> -->
                   </div>
                 </form>
 
@@ -179,7 +181,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Agregar Historia deportiva</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">{{lblTittleModal}}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -187,8 +189,8 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                           <div class="col">
                             <label for="lname">Deporte</label>
                             <div class="form-floating mb-3">
-                        <select name="city" class="rounded-inputs20 select-select col-md-3" (change)="onChangeSport($event.target)">
-                          <option   [value]="00"> --Seleccione-- </option>
+                        <select name="city" class="rounded-inputs20 select-select col-md-3"  [(ngModel)]="sportSelected"  (change)="onChangeSport($event.target)">
+                          <option [value]="sinSeleccionar"> --Seleccione-- </option>
                           <option *ngFor="let sport of sports"  [value]="sport.id" name="sport.descripcion">{{sport.descripcion}}</option>
                           </select>
 
@@ -213,7 +215,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
 
                             <div *ngFor="let option of optionsPlan; let i = index">
                               <input id="season{{i}}" name="seasons" type="radio"
-                                [value]="option.id" [(ngModel)]="favoriteSeason" />
+                                [value]="option.id" [(ngModel)]="favoriteSeason"/>
                               <label for="">{{option.nombre}}</label>
                             </div>
                           </div>
@@ -223,7 +225,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="ftpActual" type="number"
+                                <input class="form-control" id="inputftp" [(ngModel)]="anio" name="anio" type="number"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Años de practica</label>
                               </div>
@@ -234,7 +236,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="ftpActual" type="number"
+                                <input class="form-control" id="inputftp" [(ngModel)]="horaSemana" name="horaSemana" type="number"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Dedicación semana</label>
                               </div>
@@ -245,7 +247,7 @@ font-family: 'Londrina Solid', cursive; background-color: #c5c6c7; max-height:30
                         <div class="row">
                           <div class="col">
                               <div class="form-floating mb-2">
-                                <input class="form-control" id="inputftp" [(ngModel)]="ciudad" name="ftpActual" type="text"
+                                <input class="form-control" id="inputftp" [(ngModel)]="ciudad" name="ciudad" type="text"
                                   placeholder="lname" ngModel required />
                                 <label for="lname">Ciudad</label>
                               </div>
